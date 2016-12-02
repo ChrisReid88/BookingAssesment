@@ -10,7 +10,7 @@ namespace Assessment2
     class Database
     {
 
-        private MySqlConnection conn;
+        /*private MySqlConnection conn;
 
 
         //Constructor
@@ -62,6 +62,6 @@ namespace Assessment2
                 MessageBox.Show(ex.Message);
                 return false;
             }
-        }
+        }*/
     }
 }

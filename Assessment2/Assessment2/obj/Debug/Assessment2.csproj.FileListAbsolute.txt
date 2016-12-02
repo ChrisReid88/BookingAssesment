@@ -15,3 +15,6 @@ C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\obj\Debug\Assessmen
 C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\obj\Debug\Assessment2.pdb
 C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\obj\Debug\GuestDetails.baml
 C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\obj\Debug\GuestDetails.g.cs
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\bin\Debug\MySql.Data.dll
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\bin\Debug\System.Data.dll
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\bin\Debug\MySql.Data.xml

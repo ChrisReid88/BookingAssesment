@@ -11,6 +11,7 @@ namespace Assessment2
         private string name;
         private int age;
         private string passportNo;
+        private int agecost;
         
 
         public string Name
@@ -30,14 +31,17 @@ namespace Assessment2
             get { return passportNo; }
             set { passportNo = value; }
         }
-
-        public Guest()
+        public int agePrice()
         {
-        }
-
-        public Guest(string name)
-        {
-            Name = name;
+            if (age < 17)
+            {
+                agecost = 30;
+            }
+            else
+            {
+                agecost = 50;
+            }
+            return agecost;
         }
     }
 }

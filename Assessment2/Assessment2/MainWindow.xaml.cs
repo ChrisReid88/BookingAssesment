@@ -29,11 +29,20 @@ namespace Assessment2
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
-            c.Name = txtCustName.Text;
-            c.Address = txtCustAddress.Text;
-            bw.lblCustName.Content = txtCustName.Text;
-            bw.Show();
-            this.Close();
+            try
+            {
+                c.Name = txtCustName.Text;
+                c.Address = txtCustAddress.Text;
+                bw.lblCustName.Content = txtCustName.Text;
+                bw.lblCustAddress.Content = txtCustAddress.Text;
+                bw.lblCustRef.Content = c.getCustRefNo();
+                bw.Show();
+                this.Close();
+            }
+            catch (Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+            }
 
         }
     }
