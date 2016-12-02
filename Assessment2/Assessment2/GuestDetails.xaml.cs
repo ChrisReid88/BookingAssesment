@@ -23,16 +23,12 @@ namespace Assessment2
         {
             InitializeComponent();
 
-
         }
-        //Guest g = new Guest();
-        
+        BookingWindow b = new BookingWindow();
+
         private void btnGuestAdd_Click(object sender, RoutedEventArgs e)
         {
            
-            //g.Name = txtGuestName.Text;
-            //g.Age = int.Parse(txtGuestAge.Text);
-            //g.PassportNo = txtGuestPpNumber.Text;
             
             this.Close();
             

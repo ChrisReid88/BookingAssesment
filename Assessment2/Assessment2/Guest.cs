@@ -8,11 +8,19 @@ namespace Assessment2
 {
     class Guest
     {
+
+        /*public Guest (string name, int age, string passportNo)
+        {
+            name = Name;
+            age = Age;
+            passportNo = PassportNo;
+        }*/
+
         private string name;
         private int age;
         private string passportNo;
         private int agecost;
-        
+
 
         public string Name
         {

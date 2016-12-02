@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace Assessment2
     class Database
     {
 
-        /*private MySqlConnection conn;
+        private MySqlConnection con;
 
 
         //Constructor
@@ -22,15 +23,19 @@ namespace Assessment2
         //Initialize values
         private void Connect()
         {
-            string DBdetails = "server=localhost;database=40202859;uid=root;password=;";
-            conn = new MySqlConnection(DBdetails);
+            con = new MySqlConnection(
+"server=localhost;database=40202859;uid=root;password=;");
+
+
+            //string DBdetails = "server=localhost;database=40202859;uid=root;password=;";
+            //conn = new MySqlConnection(DBdetails);
         }
 
         private bool OpenConnection()
         {
             try
             {
-                conn.Open();
+                con.Open();
                 return true;
             }
             catch (MySqlException ex)
@@ -54,7 +59,7 @@ namespace Assessment2
         {
             try
             {
-                conn.Close();
+                con.Close();
                 return true;
             }
             catch (MySqlException ex)
@@ -62,6 +67,23 @@ namespace Assessment2
                 MessageBox.Show(ex.Message);
                 return false;
             }
-        }*/
+        }
+        public void Insert()
+        {
+            string query = "INSERT INTO customer (name) VALUES('John Smith')";
+
+            //open connections
+            if (this.OpenConnection() == true)
+            {
+                //create command and assign the query and connection from the constructor
+                MySqlCommand cmd = new MySqlCommand(query, con);
+
+                //Execute command
+                cmd.ExecuteNonQuery();
+
+                //close connection
+                this.CloseConnection();
+            }
+        }
     }
 }
