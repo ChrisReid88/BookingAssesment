@@ -1,1 +1,17 @@
 C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\bin\Debug\Assessment2.exe.config
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\obj\Debug\Assessment2.csprojResolveAssemblyReference.cache
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\obj\Debug\BookingWindow.baml
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\obj\Debug\MainWindow.baml
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\obj\Debug\BookingWindow.g.cs
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\obj\Debug\MainWindow.g.cs
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\obj\Debug\App.g.cs
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\obj\Debug\Assessment2_MarkupCompile.cache
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\obj\Debug\Assessment2.g.resources
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\obj\Debug\Assessment2.Properties.Resources.resources
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\obj\Debug\Assessment2.csproj.GenerateResource.Cache
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\bin\Debug\Assessment2.exe
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\bin\Debug\Assessment2.pdb
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\obj\Debug\Assessment2.exe
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\obj\Debug\Assessment2.pdb
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\obj\Debug\GuestDetails.baml
+C:\Users\Chris\Documents\Assessment2\Assessment2\Assessment2\obj\Debug\GuestDetails.g.cs

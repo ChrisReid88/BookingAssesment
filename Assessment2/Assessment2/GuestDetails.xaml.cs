@@ -10,31 +10,32 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Assessment2
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for GuestDetails.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GuestDetails : Window
     {
-        public MainWindow()
+        public GuestDetails()
         {
             InitializeComponent();
+
+
         }
-        Customer c = new Customer();
-        BookingWindow bw = new BookingWindow();
-
-        private void btnOk_Click(object sender, RoutedEventArgs e)
+        //Guest g = new Guest();
+        
+        private void btnGuestAdd_Click(object sender, RoutedEventArgs e)
         {
-            c.Name = txtCustName.Text;
-            c.Address = txtCustAddress.Text;
-            bw.lblCustName.Content = txtCustName.Text;
-            bw.Show();
+           
+            //g.Name = txtGuestName.Text;
+            //g.Age = int.Parse(txtGuestAge.Text);
+            //g.PassportNo = txtGuestPpNumber.Text;
+            
             this.Close();
-
+            
         }
     }
 }

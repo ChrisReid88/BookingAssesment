@@ -11,6 +11,7 @@ namespace Assessment2
         private string name;
         private int age;
         private string passportNo;
+        
 
         public string Name
         {
@@ -30,5 +31,13 @@ namespace Assessment2
             set { passportNo = value; }
         }
 
+        public Guest()
+        {
+        }
+
+        public Guest(string name)
+        {
+            Name = name;
+        }
     }
 }

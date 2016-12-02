@@ -13,6 +13,7 @@ namespace Assessment2
         private DateTime departure_date;
         private int booking_id = 0;
 
+        public Guest guest;
 
         public int Booking_id
         {
@@ -46,9 +47,6 @@ namespace Assessment2
             int ageprice = agePrice();
             int totalnights = getDuration();
             return ageprice * totalnights;*/
-
-        }
-
 
     }
 }
