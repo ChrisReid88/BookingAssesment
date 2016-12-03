@@ -35,3 +35,6 @@ H:\Assessment2\Assessment2\Assessment2\bin\Debug\Assessment2.exe
 H:\Assessment2\Assessment2\Assessment2\bin\Debug\Assessment2.pdb
 H:\Assessment2\Assessment2\Assessment2\bin\Debug\System.Data.dll
 H:\Assessment2\Assessment2\Assessment2\obj\Debug\Assessment2.exe
+C:\Users\Chris\Documents\Assessment2\assessment2\Assessment2\Assessment2\bin\Debug\Assessment2.exe.config
+C:\Users\Chris\Documents\Assessment2\assessment2\Assessment2\Assessment2\obj\Debug\Assessment2.exe
+C:\Users\Chris\Documents\Assessment2\assessment2\Assessment2\Assessment2\obj\Debug\Assessment2.pdb

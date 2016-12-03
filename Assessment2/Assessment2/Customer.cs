@@ -12,7 +12,7 @@ namespace Assessment2
         private string address;
         private int customerRefNo;
 
-
+        //testing git
         public string Name
         {
             get { return name; }
