@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assessment2
 {
-    class Guest
+    public class Guest
     {
 
         /*public Guest (string name, int age, string passportNo)
@@ -50,6 +50,11 @@ namespace Assessment2
                 agecost = 50;
             }
             return agecost;
+        }
+
+        public override string ToString()
+        {
+            return this.Name + " | " + this.Age + " | " + this.PassportNo;
         }
     }
 }

@@ -1,0 +1,13 @@
+H:\Assessment2\Assessment2\Assessment2\bin\Release\Assessment2.exe.config
+H:\Assessment2\Assessment2\Assessment2\obj\Release\Assessment2.csprojResolveAssemblyReference.cache
+H:\Assessment2\Assessment2\Assessment2\obj\Release\BookingWindow.baml
+H:\Assessment2\Assessment2\Assessment2\obj\Release\GuestDetails.baml
+H:\Assessment2\Assessment2\Assessment2\obj\Release\MainWindow.baml
+H:\Assessment2\Assessment2\Assessment2\obj\Release\BookingWindow.g.cs
+H:\Assessment2\Assessment2\Assessment2\obj\Release\GuestDetails.g.cs
+H:\Assessment2\Assessment2\Assessment2\obj\Release\MainWindow.g.cs
+H:\Assessment2\Assessment2\Assessment2\obj\Release\App.g.cs
+H:\Assessment2\Assessment2\Assessment2\obj\Release\Assessment2_MarkupCompile.cache
+H:\Assessment2\Assessment2\Assessment2\obj\Release\Assessment2.g.resources
+H:\Assessment2\Assessment2\Assessment2\obj\Release\Assessment2.Properties.Resources.resources
+H:\Assessment2\Assessment2\Assessment2\obj\Release\Assessment2.csproj.GenerateResource.Cache

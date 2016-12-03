@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Assessment2
 {
-    class Booking : Guest
+    public class Booking
     {
 
         private DateTime arrival_date;
         private DateTime departure_date;
         private int booking_id = 0;
 
-        
+
 
         public int Booking_id
         {
@@ -42,13 +42,15 @@ namespace Assessment2
             double stayDuration = (departure_date - arrival_date).TotalDays;
             return Convert.ToInt32(stayDuration);
         }
-        public int getCost()
+
+
+        /*public int getCost()
         {
            
-            int ageprice = agePrice();
+            int ageprice = agePrice(Age);
             int totalnights = getDuration();
             return ageprice * totalnights;
 
-        }
+        }*/
     }
 }

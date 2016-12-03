@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assessment2
 {
-    class Customer
+    public class Customer
     {
         private string name;
         private string address;

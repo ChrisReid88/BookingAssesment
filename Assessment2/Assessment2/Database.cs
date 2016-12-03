@@ -11,7 +11,7 @@ namespace Assessment2
     class Database
     {
 
-        private MySqlConnection con;
+        private MySqlConnection conn;
 
 
         //Constructor
@@ -23,19 +23,27 @@ namespace Assessment2
         //Initialize values
         private void Connect()
         {
-            con = new MySqlConnection(
-"server=localhost;database=40202859;uid=root;password=;");
+            // con = new MySqlConnection(
+            //"server=localhost;database=40202859;uid=root;password=;");
 
+            //string DBdetails = null;
 
-            //string DBdetails = "server=localhost;database=40202859;uid=root;password=;";
-            //conn = new MySqlConnection(DBdetails);
+            try
+            {
+                string DBdetails = "server=mysqlhost3;database=40202859;uid=40202859;pwd=3siqucadore;";
+                conn = new MySqlConnection(DBdetails);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private bool OpenConnection()
         {
             try
             {
-                con.Open();
+                conn.Open();
                 return true;
             }
             catch (MySqlException ex)
@@ -59,7 +67,7 @@ namespace Assessment2
         {
             try
             {
-                con.Close();
+                conn.Close();
                 return true;
             }
             catch (MySqlException ex)
@@ -70,13 +78,13 @@ namespace Assessment2
         }
         public void Insert()
         {
-            string query = "INSERT INTO customer (name) VALUES('John Smith')";
+            string query = "Select * FROM guest";
 
             //open connections
             if (this.OpenConnection() == true)
             {
                 //create command and assign the query and connection from the constructor
-                MySqlCommand cmd = new MySqlCommand(query, con);
+                MySqlCommand cmd = new MySqlCommand(query, conn);
 
                 //Execute command
                 cmd.ExecuteNonQuery();

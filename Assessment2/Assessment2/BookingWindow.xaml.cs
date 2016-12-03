@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 
 namespace Assessment2
@@ -21,63 +22,58 @@ namespace Assessment2
     /// </summary>
     public partial class BookingWindow : Window
     {
-
         Booking booking = new Booking();
         Database db = new Database();
-
-
+        Guest guest = new Guest();
+        BindingList<Guest> bindingguest = new BindingList<Guest>(); 
+       
         public BookingWindow()
         {
-            InitializeComponent();
+           InitializeComponent();
+           lstGuest.ItemsSource = bindingguest;
+
         }
-
-        List<Guest> allguests = new List<Guest>();
-        Guest guest;
-
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             if (lstGuest.Items.Count < 4)
             {
 
-                GuestDetails gd = new GuestDetails();
+                GuestDetails gd = new GuestDetails(guest, bindingguest);
                 gd.ShowDialog();
 
-                guest = new Guest();
-                guest.Name = gd.txtGuestName.Text;
+                /*guest.Name = gd.txtGuestName.Text;
                 guest.Age = int.Parse(gd.txtGuestAge.Text);
                 guest.PassportNo = gd.txtGuestPpNumber.Text;
-
-                allguests.Add(guest);
+                lstGuest.Items.Add(guest.Name + " | " + guest.Age + " | " + guest.PassportNo);*/
+                
             }
             else
             {
                 MessageBox.Show("There is a maximum of 4 guests per booking.");
-
             }
         }
-
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            //dtpArrival.SelectedDate = booking.Arrival_date;
-            //dtpDeparture.SelectedDate = booking.Departure_date;
+
             booking.Arrival_date = dtpArrival.SelectedDate.GetValueOrDefault();
             booking.Departure_date = dtpDeparture.SelectedDate.GetValueOrDefault();
-            MessageBox.Show("" + booking.getDuration() + " " + booking.getCost());
+            int stayPrice = guest.agePrice();
+            int stay = booking.getDuration();
+            int cost = stayPrice * stay;
+
+            MessageBox.Show("Duration: " + booking.getDuration() + " Price of stay: " + cost);
         }
 
         private void btnDelete_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            foreach (Guest g in allguests)
-            {
-                MessageBox.Show(" " + guest.Name);
-            }
+           foreach (Guest guest in bindingguest)
+           {
+   
+           }
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            db.DBConnect();
-            db.Insert();
-            
         }
     }
 }

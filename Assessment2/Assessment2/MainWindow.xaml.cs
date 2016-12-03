@@ -20,12 +20,18 @@ namespace Assessment2
     /// </summary>
     public partial class MainWindow : Window
     {
+
+
+        Customer c = new Customer();
+        BookingWindow bw = new BookingWindow();
+        Guest guest = new Guest();
+
         public MainWindow()
         {
             InitializeComponent();
+           
         }
-        Customer c = new Customer();
-        BookingWindow bw = new BookingWindow();
+
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {

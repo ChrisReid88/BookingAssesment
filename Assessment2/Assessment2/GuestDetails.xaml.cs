@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace Assessment2
 {
@@ -19,19 +20,24 @@ namespace Assessment2
     /// </summary>
     public partial class GuestDetails : Window
     {
-        public GuestDetails()
+        private Guest guest;
+        private BindingList<Guest> bindingguest;
+
+        public GuestDetails(Guest guest, BindingList<Guest> bindingguest)
         {
             InitializeComponent();
 
+            this.guest = guest;
+            this.bindingguest = bindingguest;
         }
-        BookingWindow b = new BookingWindow();
-
         private void btnGuestAdd_Click(object sender, RoutedEventArgs e)
         {
-           
-            
+            guest.Name = txtGuestName.Text;
+            guest.Age = int.Parse(txtGuestAge.Text);
+            guest.PassportNo = txtGuestPpNumber.Text;
+            bindingguest.Add(guest);
             this.Close();
-            
+
         }
     }
 }
