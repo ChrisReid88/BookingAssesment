@@ -21,15 +21,14 @@ namespace Assessment2
     public partial class MainWindow : Window
     {
 
-
+        Database data = new Database();
         Customer c = new Customer();
-        BookingWindow bw = new BookingWindow();
-        Guest guest = new Guest();
+
 
         public MainWindow()
         {
             InitializeComponent();
-           
+
         }
 
 
@@ -37,13 +36,19 @@ namespace Assessment2
         {
             try
             {
+                BookingWindow bw = new BookingWindow(c);
                 c.Name = txtCustName.Text;
                 c.Address = txtCustAddress.Text;
+                c.CustomerRefNo = c.getCustRefNo();
                 bw.lblCustName.Content = txtCustName.Text;
                 bw.lblCustAddress.Content = txtCustAddress.Text;
                 bw.lblCustRef.Content = c.getCustRefNo();
                 bw.Show();
-                this.Close();
+
+                data.DBConnect();
+                data.InsertCustomer(c.Name, c.Address);
+
+                this.Hide();
             }
             catch (Exception excep)
             {

@@ -23,36 +23,33 @@ namespace Assessment2
     public partial class BookingWindow : Window
     {
         Booking booking = new Booking();
-        Database db = new Database();
+        private Customer c;
         Guest guest = new Guest();
-        BindingList<Guest> bindingguest = new BindingList<Guest>(); 
-       
-        public BookingWindow()
-        {
-           InitializeComponent();
-           lstGuest.ItemsSource = bindingguest;
+        BindingList<Guest> bindingguest = new BindingList<Guest>();
 
+        public BookingWindow(Customer c)
+        {
+            InitializeComponent();
+            lstGuest.ItemsSource = bindingguest;
+            this.c = c;
         }
+
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             if (lstGuest.Items.Count < 4)
             {
 
-                GuestDetails gd = new GuestDetails(guest, bindingguest);
+                GuestDetails gd = new GuestDetails(guest, bindingguest, c);
                 gd.ShowDialog();
 
-                /*guest.Name = gd.txtGuestName.Text;
-                guest.Age = int.Parse(gd.txtGuestAge.Text);
-                guest.PassportNo = gd.txtGuestPpNumber.Text;
-                lstGuest.Items.Add(guest.Name + " | " + guest.Age + " | " + guest.PassportNo);*/
-                
             }
             else
             {
                 MessageBox.Show("There is a maximum of 4 guests per booking.");
             }
         }
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+
+        private void btnCalculate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
 
             booking.Arrival_date = dtpArrival.SelectedDate.GetValueOrDefault();
@@ -66,14 +63,18 @@ namespace Assessment2
 
         private void btnDelete_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-           foreach (Guest guest in bindingguest)
-           {
-   
-           }
+
+
+
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void btnCalculate(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

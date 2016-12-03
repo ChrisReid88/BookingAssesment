@@ -49,7 +49,7 @@ namespace Assessment2
 
         public int getCustRefNo()
         {
-            CustomerRefNo = 0;
+            CustomerRefNo = 1;
             CustomerRefNo++;
             return customerRefNo;
         }

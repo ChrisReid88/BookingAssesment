@@ -42,15 +42,5 @@ namespace Assessment2
             double stayDuration = (departure_date - arrival_date).TotalDays;
             return Convert.ToInt32(stayDuration);
         }
-
-
-        /*public int getCost()
-        {
-           
-            int ageprice = agePrice(Age);
-            int totalnights = getDuration();
-            return ageprice * totalnights;
-
-        }*/
     }
 }

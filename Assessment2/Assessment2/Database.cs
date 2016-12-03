@@ -23,14 +23,9 @@ namespace Assessment2
         //Initialize values
         private void Connect()
         {
-            // con = new MySqlConnection(
-            //"server=localhost;database=40202859;uid=root;password=;");
-
-            //string DBdetails = null;
-
             try
             {
-                string DBdetails = "server=mysqlhost3;database=40202859;uid=40202859;pwd=3siqucadore;";
+                string DBdetails = "server=127.0.0.1;database=40202859;uid=root;pwd=;";
                 conn = new MySqlConnection(DBdetails);
             }
             catch (Exception ex)
@@ -76,10 +71,27 @@ namespace Assessment2
                 return false;
             }
         }
-        public void Insert()
+        public void InsertGuest(string name, int age, string passportNo, int customerRef)
         {
-            string query = "Select * FROM guest";
+            string query = "INSERT INTO `guest` (`passport_no`, `name`, `age`, `customerRef`) VALUES ('" + passportNo + "','" + name + "','" + age + "','" + customerRef + "');";
+            
+            //open connections
+            if (this.OpenConnection() == true)
+            {
+                //create command and assign the query and connection from the constructor
+                MySqlCommand cmd = new MySqlCommand(query, conn);
 
+                //Execute command
+                cmd.ExecuteNonQuery();
+
+                //close connection
+                this.CloseConnection();
+            }
+        }
+          public void InsertCustomer(string name, string address)
+        {
+            string query = "INSERT INTO `customer`(`name`, `address`) VALUES ('" + name + "','" + address+ "');";
+            
             //open connections
             if (this.OpenConnection() == true)
             {
