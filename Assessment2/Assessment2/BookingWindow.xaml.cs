@@ -24,24 +24,30 @@ namespace Assessment2
     {
         Booking booking = new Booking();
         private Customer c;
+        private Database data;
         Guest guest = new Guest();
+
         BindingList<Guest> bindingguest = new BindingList<Guest>();
 
-        public BookingWindow(Customer c)
+        public BookingWindow(Customer c, Database data)
         {
             InitializeComponent();
             lstGuest.ItemsSource = bindingguest;
             this.c = c;
+            this.data = data;
+            booking.Arrival_date = dtpArrival.SelectedDate.GetValueOrDefault();
+            booking.Departure_date = dtpDeparture.SelectedDate.GetValueOrDefault();
+
+
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             if (lstGuest.Items.Count < 4)
             {
-
+                
                 GuestDetails gd = new GuestDetails(guest, bindingguest, c);
                 gd.ShowDialog();
-
             }
             else
             {
@@ -52,8 +58,6 @@ namespace Assessment2
         private void btnCalculate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
 
-            booking.Arrival_date = dtpArrival.SelectedDate.GetValueOrDefault();
-            booking.Departure_date = dtpDeparture.SelectedDate.GetValueOrDefault();
             int stayPrice = guest.agePrice();
             int stay = booking.getDuration();
             int cost = stayPrice * stay;
@@ -63,17 +67,25 @@ namespace Assessment2
 
         private void btnDelete_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
-
-
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
+            var queryAllguests = from guest in bindingguest
+                                 select guest;
+
+            foreach (Guest guest in queryAllguests)
+            {
+                MessageBox.Show("" + guest);
+            }
         }
 
         private void btnCalculate(object sender, RoutedEventArgs e)
         {
+
+            booking.Arrival_date = dtpArrival.SelectedDate.GetValueOrDefault();
+            booking.Departure_date = dtpDeparture.SelectedDate.GetValueOrDefault();
+            //data.InsertBooking(booking.Arrival_date, booking.Departure_date);
 
         }
     }

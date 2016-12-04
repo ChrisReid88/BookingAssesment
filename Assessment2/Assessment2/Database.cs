@@ -8,19 +8,17 @@ using MySql.Data.MySqlClient;
 
 namespace Assessment2
 {
-    class Database
+    public class Database
     {
 
         private MySqlConnection conn;
 
 
-        //Constructor
         public void DBConnect()
         {
             Connect();
         }
 
-        //Initialize values
         private void Connect()
         {
             try
@@ -71,37 +69,36 @@ namespace Assessment2
                 return false;
             }
         }
-        public void InsertGuest(string name, int age, string passportNo, int customerRef)
+        public void InsertGuest(string name, int age, string passportNo)
         {
-            string query = "INSERT INTO `guest` (`passport_no`, `name`, `age`, `customerRef`) VALUES ('" + passportNo + "','" + name + "','" + age + "','" + customerRef + "');";
-            
-            //open connections
+            string query = "INSERT INTO `guest` (`passportNo`, `guestName`, `age`) VALUES ('" + passportNo + "','" + name + "','" + age + "');";
+
             if (this.OpenConnection() == true)
             {
-                //create command and assign the query and connection from the constructor
                 MySqlCommand cmd = new MySqlCommand(query, conn);
-
-                //Execute command
                 cmd.ExecuteNonQuery();
-
-                //close connection
                 this.CloseConnection();
             }
         }
-          public void InsertCustomer(string name, string address)
+        public void InsertCustomer(string name, string address)
         {
-            string query = "INSERT INTO `customer`(`name`, `address`) VALUES ('" + name + "','" + address+ "');";
-            
-            //open connections
+            string query = "INSERT INTO `customer`(`name`, `address`) VALUES ('" + name + "','" + address + "');";
+
             if (this.OpenConnection() == true)
             {
-                //create command and assign the query and connection from the constructor
                 MySqlCommand cmd = new MySqlCommand(query, conn);
-
-                //Execute command
                 cmd.ExecuteNonQuery();
+                this.CloseConnection();
+            }
+        }
 
-                //close connection
+        public void InsertBooking(DateTime arrival, DateTime departure)
+        {
+            string query = "INSERT INTO `booking`(`arrival`, `departure`) VALUES ('" + arrival + "','" + departure + "');";
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.ExecuteNonQuery();
                 this.CloseConnection();
             }
         }

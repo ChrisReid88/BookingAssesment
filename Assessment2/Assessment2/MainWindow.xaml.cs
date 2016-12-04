@@ -36,7 +36,7 @@ namespace Assessment2
         {
             try
             {
-                BookingWindow bw = new BookingWindow(c);
+                BookingWindow bw = new BookingWindow(c, data);
                 c.Name = txtCustName.Text;
                 c.Address = txtCustAddress.Text;
                 c.CustomerRefNo = c.getCustRefNo();
@@ -44,10 +44,10 @@ namespace Assessment2
                 bw.lblCustAddress.Content = txtCustAddress.Text;
                 bw.lblCustRef.Content = c.getCustRefNo();
                 bw.Show();
-
                 data.DBConnect();
-                data.InsertCustomer(c.Name, c.Address);
+                data.InsertCustomer(customerref, c.Name, c.Address);
 
+              
                 this.Hide();
             }
             catch (Exception excep)
