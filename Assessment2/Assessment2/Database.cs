@@ -21,7 +21,7 @@ namespace Assessment2
         {
             try
             {
-                string DBdetails = "server=127.0.0.1;database=40202859;uid=root;pwd=password;";
+                string DBdetails = "server=127.0.0.1;database=40202859;uid=root;pwd=;";
                 conn = new MySqlConnection(DBdetails);
             }
             catch (Exception ex)
@@ -131,7 +131,7 @@ namespace Assessment2
                 this.CloseConnection();
             }
         }
-        public void EditGuest(string name, int age, string passportNo)
+        public void SetGuest(string name, int age, string passportNo)
         {
             string query = "SELECT guestName, age, passportNo FROM guest WHERE passportNo='" + passportNo + "';";
             MySqlDataReader sdr;
@@ -150,8 +150,44 @@ namespace Assessment2
                 sdr.Close();
                 this.CloseConnection();
             }
+        }
+        public void EditGuest(string name, int age, string passportNo)
+        {
+            string query2 = "UPDATE guest SET guestName='" + name + "',age=" + age + ",passportNo='" + passportNo + "' WHERE passportNo='" + passportNo + "';";
+            
+            if (this.OpenConnection() == true)
+            {
+                MySqlDataReader sdr;
+                MySqlCommand comm = new MySqlCommand(query2, conn);
+                //comm.CommandText = query2;
+                sdr = comm.ExecuteReader();
+                while (sdr.Read())
+                {
+                    name = sdr.GetString(0);
+                    age = Int32.Parse(sdr.GetString(1));
+                    passportNo = sdr.GetString(2);
+                }
+                sdr.Close();
+                this.CloseConnection();
+            }
+        }
 
+        public void DeleteGuest(string passportNo)
+        {
+            string query2 = "DELETE FROM guest WHERE passportNo='" + passportNo + "';";
 
+            if (this.OpenConnection() == true)
+            {
+                MySqlDataReader sdr;
+                MySqlCommand comm = new MySqlCommand(query2, conn);
+                sdr = comm.ExecuteReader();
+                while (sdr.Read())
+                {
+                    passportNo = sdr.GetString(2);
+                }
+                sdr.Close();
+                this.CloseConnection();
+            }
         }
     }
 }

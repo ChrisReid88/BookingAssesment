@@ -27,6 +27,7 @@ namespace Assessment2
         private Database data;
         Guest guest = new Guest();
 
+
         BindingList<Guest> bindingguest = new BindingList<Guest>();
 
         public BookingWindow(Customer c, Database data)
@@ -37,6 +38,7 @@ namespace Assessment2
             this.data = data;
             booking.BookingRef = 0;
         }
+
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -50,29 +52,22 @@ namespace Assessment2
                 MessageBox.Show("There is a maximum of 4 guests per booking.");
             }
             btnEdit.IsEnabled = true;
+            btnDelete.IsEnabled = true;
         }
 
-
-
-        private void btnDelete_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-        }
-
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        protected void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             if (!(lstGuest.SelectedIndex == -1))
             {
-                GuestDetails gd = new GuestDetails(guest, bindingguest, c, booking);
+                EditGuest eg = new EditGuest(guest, bindingguest);
                 string selected = lstGuest.SelectedItem.ToString();
-                string[] item = selected.Split(' | ');
-
-                data.EditGuest(item[0], Int32.Parse(item[1]), item[2]);
-                gd.txtGuestName.Text = item[0];
-                gd.txtGuestAge.Text = item[1];
-                gd.txtGuestPpNumber.Text = item[2];
-                gd.btnGuestAdd.Content = "Amend Guest";
-                gd.ShowDialog();
-                MessageBox.Show(item[2]);
+                string[] item = selected.Split('|');
+                eg.txtEditName.Text = item[0];
+                eg.txtEditAge.Text = item[1];
+                eg.txtEditPp.Text = item[2];
+                data.SetGuest(item[0], Int32.Parse(item[1]), item[2]);
+                eg.ShowDialog();
+                bindingguest.RemoveAt(lstGuest.SelectedIndex);
             }
             else
             {
@@ -90,7 +85,29 @@ namespace Assessment2
             int cost = stayPrice * stay;
             data.DBConnect();
             data.InsertCustomer(c.Name, c.Address);
-            data.InsertBooking(booking.Arrival_date, booking.Departure_date,c.CustomerRef);
+            data.InsertBooking(booking.Arrival_date, booking.Departure_date, c.CustomerRef);
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (!(lstGuest.SelectedIndex == -1))
+            {
+                string selected = lstGuest.SelectedItem.ToString();
+                string[] item = selected.Split('|');
+                data.DeleteGuest(item[2]);
+                bindingguest.RemoveAt(lstGuest.SelectedIndex);
+            }
+        }
+
+        private void lstGuest_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            /*EditGuest eg = new EditGuest(guest, bindingguest);
+            string selected = lstGuest.SelectedItem.ToString();
+            string[] item = selected.Split('|');
+            data.SetGuest(item[0], Int32.Parse(item[1]), item[2]);
+            eg.txtEditName.Text = item[0];
+            eg.txtEditAge.Text = item[1];
+            eg.txtEditPp.Text = item[2];*/
         }
     }
 }

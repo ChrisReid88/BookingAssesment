@@ -46,7 +46,9 @@ namespace Assessment2
 
         public override string ToString()
         {
-            return this.Name + " | " + this.Age + " | " + this.PassportNo;
+            return this.Name + "|" + this.Age + "|" + this.PassportNo;
         }
+
+
     }
 }

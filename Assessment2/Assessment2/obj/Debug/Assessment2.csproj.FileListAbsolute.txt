@@ -76,3 +76,5 @@ C:\Users\ChrisReid\Desktop\Coursework\Assessment2\Assessment2\obj\Debug\Assessme
 C:\Users\ChrisReid\Desktop\Coursework\Assessment2\Assessment2\obj\Debug\Assessment2.exe
 C:\Users\ChrisReid\Desktop\Coursework\Assessment2\Assessment2\obj\Debug\Assessment2.pdb
 C:\Users\ChrisReid\Desktop\Coursework\Assessment2\Assessment2\obj\Debug\Assessment2.csprojResolveAssemblyReference.cache
+C:\Users\Chris\Documents\Assessment2\assessment2\Assessment2\Assessment2\obj\Debug\EditGuest.baml
+C:\Users\Chris\Documents\Assessment2\assessment2\Assessment2\Assessment2\obj\Debug\EditGuest.g.cs
