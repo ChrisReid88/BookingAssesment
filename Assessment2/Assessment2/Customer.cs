@@ -10,9 +10,8 @@ namespace Assessment2
     {
         private string name;
         private string address;
-        private int customerRefNo;
+        private int customerRef;
 
-        //testing git
         public string Name
         {
             get { return name; }
@@ -30,28 +29,21 @@ namespace Assessment2
         public string Address
         {
             get { return address; }
-            set 
-            { 
+            set
+            {
                 if (value == "")
                 {
                     throw new ArgumentException("Please enter the customer address.");
                 }
-                address = value; 
+                address = value;
             }
 
         }
 
-        public int CustomerRefNo
+        public int CustomerRef
         {
-            get { return customerRefNo; }
-            set { customerRefNo = value; }
-        }
-
-        public int getCustRefNo()
-        {
-            CustomerRefNo = 1;
-            CustomerRefNo++;
-            return customerRefNo;
+            get { return customerRef; }
+            set { customerRef = value; }
         }
     }
 }

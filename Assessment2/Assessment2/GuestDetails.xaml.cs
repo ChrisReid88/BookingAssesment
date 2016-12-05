@@ -24,14 +24,16 @@ namespace Assessment2
         private Guest guest;
         private BindingList<Guest> bindingguest;
         Database db = new Database();
+        private Booking booking;
 
-        public GuestDetails(Guest guest, BindingList<Guest> bindingguest, Customer c)
+        public GuestDetails(Guest guest, BindingList<Guest> bindingguest, Customer c, Booking booking)
         {
             InitializeComponent();
 
             this.guest = guest;
             this.bindingguest = bindingguest;
             this.c = c;
+            this.booking = booking;
         }
         private void btnGuestAdd_Click(object sender, RoutedEventArgs e)
         { 
@@ -40,6 +42,9 @@ namespace Assessment2
             guest.PassportNo = txtGuestPpNumber.Text;
             bindingguest.Add(guest);
             this.Close();
+            db.DBConnect();
+            db.InsertGuest(guest.Name,guest.Age, guest.PassportNo,booking.BookingRef);
+            
 
         }
     }

@@ -11,14 +11,14 @@ namespace Assessment2
 
         private DateTime arrival_date;
         private DateTime departure_date;
-        private int booking_id = 0;
+        private int bookingRef;
 
 
 
-        public int Booking_id
+        public int BookingRef
         {
-            get { return booking_id; }
-            set { booking_id = value; }
+            get { return bookingRef; }
+            set { bookingRef = value; }
         }
 
         public DateTime Arrival_date
@@ -30,11 +30,6 @@ namespace Assessment2
         {
             get { return departure_date; }
             set { departure_date = value; }
-        }
-
-        public int getBookingId()
-        {
-            return booking_id++;
         }
 
         public int getDuration()

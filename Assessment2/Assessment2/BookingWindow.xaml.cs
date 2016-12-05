@@ -35,35 +35,24 @@ namespace Assessment2
             lstGuest.ItemsSource = bindingguest;
             this.c = c;
             this.data = data;
-            booking.Arrival_date = dtpArrival.SelectedDate.GetValueOrDefault();
-            booking.Departure_date = dtpDeparture.SelectedDate.GetValueOrDefault();
-
-
+            booking.BookingRef = 0;
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             if (lstGuest.Items.Count < 4)
             {
-                
-                GuestDetails gd = new GuestDetails(guest, bindingguest, c);
+                GuestDetails gd = new GuestDetails(guest, bindingguest, c, booking);
                 gd.ShowDialog();
             }
             else
             {
                 MessageBox.Show("There is a maximum of 4 guests per booking.");
             }
+            btnEdit.IsEnabled = true;
         }
 
-        private void btnCalculate_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
 
-            int stayPrice = guest.agePrice();
-            int stay = booking.getDuration();
-            int cost = stayPrice * stay;
-
-            MessageBox.Show("Duration: " + booking.getDuration() + " Price of stay: " + cost);
-        }
 
         private void btnDelete_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -71,22 +60,37 @@ namespace Assessment2
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            var queryAllguests = from guest in bindingguest
-                                 select guest;
-
-            foreach (Guest guest in queryAllguests)
+            if (!(lstGuest.SelectedIndex == -1))
             {
-                MessageBox.Show("" + guest);
+                GuestDetails gd = new GuestDetails(guest, bindingguest, c, booking);
+                string selected = lstGuest.SelectedItem.ToString();
+                string[] item = selected.Split(' | ');
+
+                data.EditGuest(item[0], Int32.Parse(item[1]), item[2]);
+                gd.txtGuestName.Text = item[0];
+                gd.txtGuestAge.Text = item[1];
+                gd.txtGuestPpNumber.Text = item[2];
+                gd.btnGuestAdd.Content = "Amend Guest";
+                gd.ShowDialog();
+                MessageBox.Show(item[2]);
+            }
+            else
+            {
+                MessageBox.Show("Please select a guest");
             }
         }
 
-        private void btnCalculate(object sender, RoutedEventArgs e)
+        private void btnCalculate_Click(object sender, RoutedEventArgs e)
         {
-
+            btnAdd.IsEnabled = true;
             booking.Arrival_date = dtpArrival.SelectedDate.GetValueOrDefault();
             booking.Departure_date = dtpDeparture.SelectedDate.GetValueOrDefault();
-            //data.InsertBooking(booking.Arrival_date, booking.Departure_date);
-
+            int stayPrice = guest.agePrice();
+            int stay = booking.getDuration();
+            int cost = stayPrice * stay;
+            data.DBConnect();
+            data.InsertCustomer(c.Name, c.Address);
+            data.InsertBooking(booking.Arrival_date, booking.Departure_date,c.CustomerRef);
         }
     }
 }

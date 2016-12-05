@@ -12,8 +12,6 @@ namespace Assessment2
     {
 
         private MySqlConnection conn;
-
-
         public void DBConnect()
         {
             Connect();
@@ -23,7 +21,7 @@ namespace Assessment2
         {
             try
             {
-                string DBdetails = "server=127.0.0.1;database=40202859;uid=root;pwd=;";
+                string DBdetails = "server=127.0.0.1;database=40202859;uid=root;pwd=password;";
                 conn = new MySqlConnection(DBdetails);
             }
             catch (Exception ex)
@@ -69,9 +67,24 @@ namespace Assessment2
                 return false;
             }
         }
-        public void InsertGuest(string name, int age, string passportNo)
+        public void InsertGuest(string name, int age, string passportNo, int bookRef)
         {
-            string query = "INSERT INTO `guest` (`passportNo`, `guestName`, `age`) VALUES ('" + passportNo + "','" + name + "','" + age + "');";
+            string bookingRef = "SELECT MAX(bookingRef) FROM booking";
+            MySqlDataReader sdr;
+
+
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand comm = new MySqlCommand(bookingRef, conn);
+                comm.CommandText = bookingRef;
+                sdr = comm.ExecuteReader();
+                while (sdr.Read())
+                    bookRef = Int32.Parse(sdr.GetString(0));
+                sdr.Close();
+                this.CloseConnection();
+            }
+
+            string query = "INSERT INTO `guest` VALUES ('" + passportNo + "','" + name + "'," + age + "," + bookRef + ");";
 
             if (this.OpenConnection() == true)
             {
@@ -92,15 +105,53 @@ namespace Assessment2
             }
         }
 
-        public void InsertBooking(DateTime arrival, DateTime departure)
+        public void InsertBooking(DateTime arrival, DateTime departure, int customerref)
         {
-            string query = "INSERT INTO `booking`(`arrival`, `departure`) VALUES ('" + arrival + "','" + departure + "');";
+            string custRef = "SELECT MAX(customerRef) FROM customer";
+            MySqlDataReader sdr;
+
+
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand comm = new MySqlCommand(custRef, conn);
+                comm.CommandText = custRef;
+                sdr = comm.ExecuteReader();
+                while (sdr.Read())
+                    customerref = Int32.Parse(sdr.GetString(0));
+                sdr.Close();
+                this.CloseConnection();
+            }
+
+            string query = "INSERT INTO `booking` VALUES (bookingRef,'" + arrival + "','" + departure + "'," + customerref + ");";
             if (this.OpenConnection() == true)
             {
                 MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.CommandText = query;
                 cmd.ExecuteNonQuery();
                 this.CloseConnection();
             }
+        }
+        public void EditGuest(string name, int age, string passportNo)
+        {
+            string query = "SELECT guestName, age, passportNo FROM guest WHERE passportNo='" + passportNo + "';";
+            MySqlDataReader sdr;
+
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand comm = new MySqlCommand(query, conn);
+                comm.CommandText = query;
+                sdr = comm.ExecuteReader();
+                while (sdr.Read())
+                {
+                    name = sdr.GetString(0);
+                    age = Int32.Parse(sdr.GetString(1));
+                    passportNo = sdr.GetString(2);
+                }
+                sdr.Close();
+                this.CloseConnection();
+            }
+
+
         }
     }
 }

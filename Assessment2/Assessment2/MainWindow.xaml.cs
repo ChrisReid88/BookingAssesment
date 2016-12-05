@@ -39,13 +39,10 @@ namespace Assessment2
                 BookingWindow bw = new BookingWindow(c, data);
                 c.Name = txtCustName.Text;
                 c.Address = txtCustAddress.Text;
-                c.CustomerRefNo = c.getCustRefNo();
                 bw.lblCustName.Content = txtCustName.Text;
                 bw.lblCustAddress.Content = txtCustAddress.Text;
-                bw.lblCustRef.Content = c.getCustRefNo();
+                bw.lblCustRef.Content = c.CustomerRef;
                 bw.Show();
-                data.DBConnect();
-                data.InsertCustomer(customerref, c.Name, c.Address);
 
               
                 this.Hide();
