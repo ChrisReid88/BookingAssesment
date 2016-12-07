@@ -36,15 +36,14 @@ namespace Assessment2
             this.booking = booking;
         }
         private void btnGuestAdd_Click(object sender, RoutedEventArgs e)
-        { 
+        {
+            db.DBConnect();
             guest.Name = txtGuestName.Text;
             guest.Age = int.Parse(txtGuestAge.Text);
             guest.PassportNo = txtGuestPpNumber.Text;
+            db.InsertGuest(guest.Name, guest.Age, guest.PassportNo, booking.BookingRef);
             bindingguest.Add(guest);
             this.Close();
-            db.DBConnect();
-            db.InsertGuest(guest.Name,guest.Age, guest.PassportNo,booking.BookingRef);
-            
 
         }
     }

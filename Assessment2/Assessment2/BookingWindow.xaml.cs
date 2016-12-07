@@ -37,8 +37,14 @@ namespace Assessment2
             this.c = c;
             this.data = data;
             booking.BookingRef = 0;
+
         }
 
+        private void lstGuest_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+           guest.selected = lstGuest.SelectedItem.ToString();
+        }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -55,17 +61,17 @@ namespace Assessment2
             btnDelete.IsEnabled = true;
         }
 
-        protected void btnEdit_Click(object sender, RoutedEventArgs e)
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             if (!(lstGuest.SelectedIndex == -1))
             {
                 EditGuest eg = new EditGuest(guest, bindingguest);
-                string selected = lstGuest.SelectedItem.ToString();
-                string[] item = selected.Split('|');
+              
+                string[] item = guest.selected.Split('|');
                 eg.txtEditName.Text = item[0];
                 eg.txtEditAge.Text = item[1];
                 eg.txtEditPp.Text = item[2];
-                data.SetGuest(item[0], Int32.Parse(item[1]), item[2]);
+                //data.SetGuest(item[0], Int32.Parse(item[1]), item[2]);
                 eg.ShowDialog();
                 bindingguest.RemoveAt(lstGuest.SelectedIndex);
             }
@@ -78,14 +84,22 @@ namespace Assessment2
         private void btnCalculate_Click(object sender, RoutedEventArgs e)
         {
             btnAdd.IsEnabled = true;
+            btnCalculate.IsEnabled = false;
+
             booking.Arrival_date = dtpArrival.SelectedDate.GetValueOrDefault();
             booking.Departure_date = dtpDeparture.SelectedDate.GetValueOrDefault();
+
             int stayPrice = guest.agePrice();
             int stay = booking.getDuration();
             int cost = stayPrice * stay;
+
             data.DBConnect();
             data.InsertCustomer(c.Name, c.Address);
-            data.InsertBooking(booking.Arrival_date, booking.Departure_date, c.CustomerRef);
+
+            //Not saving the month
+            data.InsertBooking(booking.Arrival_date.ToString("yyyy-MM-dd"), booking.Departure_date.ToString("yyyy-MM-dd"), c.CustomerRef);
+            MessageBox.Show(booking.Arrival_date.Date.ToString("yyyy-MM-dd"));
+
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -97,17 +111,7 @@ namespace Assessment2
                 data.DeleteGuest(item[2]);
                 bindingguest.RemoveAt(lstGuest.SelectedIndex);
             }
-        }
 
-        private void lstGuest_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            /*EditGuest eg = new EditGuest(guest, bindingguest);
-            string selected = lstGuest.SelectedItem.ToString();
-            string[] item = selected.Split('|');
-            data.SetGuest(item[0], Int32.Parse(item[1]), item[2]);
-            eg.txtEditName.Text = item[0];
-            eg.txtEditAge.Text = item[1];
-            eg.txtEditPp.Text = item[2];*/
         }
     }
 }

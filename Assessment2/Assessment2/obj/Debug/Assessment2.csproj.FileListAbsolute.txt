@@ -78,3 +78,5 @@ C:\Users\ChrisReid\Desktop\Coursework\Assessment2\Assessment2\obj\Debug\Assessme
 C:\Users\ChrisReid\Desktop\Coursework\Assessment2\Assessment2\obj\Debug\Assessment2.csprojResolveAssemblyReference.cache
 C:\Users\Chris\Documents\Assessment2\assessment2\Assessment2\Assessment2\obj\Debug\EditGuest.baml
 C:\Users\Chris\Documents\Assessment2\assessment2\Assessment2\Assessment2\obj\Debug\EditGuest.g.cs
+C:\Users\Chris\Documents\Assessment2\assessment2\Assessment2\Assessment2\obj\Debug\EditCustomer.baml
+C:\Users\Chris\Documents\Assessment2\assessment2\Assessment2\Assessment2\obj\Debug\EditCustomer.g.cs

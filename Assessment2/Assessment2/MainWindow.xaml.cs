@@ -23,14 +23,13 @@ namespace Assessment2
 
         Database data = new Database();
         Customer c = new Customer();
+        Customer c2 = new Customer();
 
 
         public MainWindow()
         {
             InitializeComponent();
-
         }
-
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
@@ -41,17 +40,29 @@ namespace Assessment2
                 c.Address = txtCustAddress.Text;
                 bw.lblCustName.Content = txtCustName.Text;
                 bw.lblCustAddress.Content = txtCustAddress.Text;
-                bw.lblCustRef.Content = c.CustomerRef;
-                bw.Show();
 
-              
+                bw.Show();
                 this.Hide();
             }
             catch (Exception excep)
             {
                 MessageBox.Show(excep.Message);
             }
+        }
 
+        private void btnEditCust_Click(object sender, RoutedEventArgs e)
+        {
+
+            EditCustomer ec = new EditCustomer(c);
+            data.DBConnect();
+            ec.txtEditCustRef.Text = txtEditCustP.Text;
+
+           // data.SetCust(c2.Name, c2.Address, c2.CustomerRef);
+            //c2.Name = ec.txtEditCustName.Text;
+           // c.Address = ec.txtEditCustAddress.Text;
+
+
+            ec.ShowDialog();
         }
     }
 }

@@ -34,13 +34,13 @@ namespace Assessment2
         private void btnAmend_Click(object sender, RoutedEventArgs e)
         {
             data.DBConnect();
-            data.EditGuest(txtEditName.Text, Int32.Parse(txtEditAge.Text), txtEditPp.Text);
             guest.Name = txtEditName.Text;
             guest.Age = int.Parse(txtEditAge.Text);
             guest.PassportNo = txtEditPp.Text;
-            
+            data.EditGuest(txtEditName.Text, Int32.Parse(txtEditAge.Text), txtEditPp.Text);
             bindingguest.Add(guest);
             this.Close();
+            
         }
     }
 }
