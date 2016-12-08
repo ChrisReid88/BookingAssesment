@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace Assessment2
 {
-    public class Booking
+    public class Booking : Extras
     {
 
         private DateTime arrival_date;
         private DateTime departure_date;
         private int bookingRef;
+        private int totalStayPrice;
+        private int cost;
 
 
 
@@ -21,6 +23,11 @@ namespace Assessment2
             set { bookingRef = value; }
         }
 
+        public int TotalStayPrice
+        {
+            get { return totalStayPrice; }
+            set { totalStayPrice = value; }
+        }
         public DateTime Arrival_date
         {
             get { return arrival_date; }
@@ -30,6 +37,12 @@ namespace Assessment2
         {
             get { return departure_date; }
             set { departure_date = value; }
+        }
+
+        public int Cost
+        {
+            get { return cost; }
+            set { cost = value; }
         }
 
         public int getDuration()

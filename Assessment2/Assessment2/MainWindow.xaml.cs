@@ -57,12 +57,21 @@ namespace Assessment2
             data.DBConnect();
             ec.txtEditCustRef.Text = txtEditCustP.Text;
 
-           // data.SetCust(c2.Name, c2.Address, c2.CustomerRef);
+            // data.SetCust(c2.Name, c2.Address, c2.CustomerRef);
             //c2.Name = ec.txtEditCustName.Text;
-           // c.Address = ec.txtEditCustAddress.Text;
+            // c.Address = ec.txtEditCustAddress.Text;
 
 
             ec.ShowDialog();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            data.DBConnect();
+            Guest g = data.SetGuest(txt1.Text);
+            txt2.Text = g.Age.ToString();
+           
         }
     }
 }

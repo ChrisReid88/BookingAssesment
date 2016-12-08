@@ -11,12 +11,15 @@
         <Label Content="Address" HorizontalAlignment="Left" Margin="50,101,0,0" VerticalAlignment="Top" Grid.Row="1"/>
         <TextBox x:Name="txtCustName" HorizontalAlignment="Left" Height="23" Margin="181,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
         <TextBox x:Name="txtCustAddress" HorizontalAlignment="Left" Height="23" Margin="181,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.272,-0.352" Grid.Row="1"/>
-        <Button x:Name="btnOk" Content="Add Customer" HorizontalAlignment="Left" Margin="123,155,0,0" VerticalAlignment="Top" Width="86" Click="btnOk_Click" Grid.Row="1"/>
+        <Button x:Name="btnOk" Content="Add Customer" HorizontalAlignment="Left" Margin="72,132,0,0" VerticalAlignment="Top" Width="86" Click="btnOk_Click" Grid.Row="1"/>
         <Button x:Name="btnEditCust" Content="Edit" HorizontalAlignment="Left" Margin="134,263,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.053,0.35" Click="btnEditCust_Click"/>
         <TextBox x:Name="txtEditCustP" HorizontalAlignment="Left" Height="23" Margin="181,223,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBlock HorizontalAlignment="Center" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="342" FontFamily="Segoe UI Black" FontSize="20" Background="#FFB8B8B8" Grid.RowSpan="2"><Run Language="en-gb" Text="              "/><Run Text="Napier Holiday Villa"/></TextBlock>
         <Label Content="Enter Customer Reference" HorizontalAlignment="Left" Margin="10,223,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Separator HorizontalAlignment="Left" Height="4" Margin="0,196,0,0" Grid.Row="1" VerticalAlignment="Top" Width="342"/>
+        <TextBox x:Name="txt1" HorizontalAlignment="Left" Height="23" Margin="201,132,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="83,167,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <TextBox x:Name="txt2" HorizontalAlignment="Left" Height="23" Margin="201,177,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

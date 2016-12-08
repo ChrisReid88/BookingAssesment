@@ -12,6 +12,8 @@ namespace Assessment2
         private int age;
         private string passportNo;
         private int agecost;
+        private int noOfGuests;
+
         public string selected { get; set; }
 
 
@@ -32,6 +34,13 @@ namespace Assessment2
             get { return passportNo; }
             set { passportNo = value; }
         }
+
+        public int NoOfGuests
+        {
+            get { return noOfGuests; }
+            set { noOfGuests = value; }
+        }
+
         public int agePrice()
         {
             if (age < 17)
@@ -43,11 +52,6 @@ namespace Assessment2
                 agecost = 50;
             }
             return agecost;
-        }
-
-        public void getstring()
-        {
-
         }
 
         public override string ToString()

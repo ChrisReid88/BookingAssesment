@@ -130,10 +130,11 @@ namespace Assessment2
             }
         }
 
-        /*public void SetGuest(string name, int age, string passportNo)
+        public Guest SetGuest(string passportNo)
         {
             string query = "SELECT guestName, age, passportNo FROM guest WHERE passportNo='" + passportNo + "';";
             MySqlDataReader sdr;
+            Guest guest = new Guest();
 
             if (this.OpenConnection() == true)
             {
@@ -142,14 +143,18 @@ namespace Assessment2
                 sdr = comm.ExecuteReader();
                 while (sdr.Read())
                 {
-                    name = sdr.GetString(0);
-                    age = Int32.Parse(sdr.GetString(1));
-                    passportNo = sdr.GetString(2);
+
+                    guest.Name = sdr.GetString(0);
+                    guest.Age = Int32.Parse(sdr.GetString(1));
+                    guest.PassportNo = sdr.GetString(2);
+
                 }
+
                 sdr.Close();
                 this.CloseConnection();
             }
-        }*/
+            return guest;
+        }
 
         public void EditGuest(string name, int age, string passportNo)
         {
@@ -233,4 +238,4 @@ namespace Assessment2
         }
     }
 }
-   
+

@@ -27,7 +27,6 @@ namespace Assessment2
         private Database data;
         Guest guest = new Guest();
 
-
         BindingList<Guest> bindingguest = new BindingList<Guest>();
 
         public BookingWindow(Customer c, Database data)
@@ -42,8 +41,10 @@ namespace Assessment2
 
         private void lstGuest_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-           guest.selected = lstGuest.SelectedItem.ToString();
+            if (lstGuest.SelectedIndex >= 0)
+            {
+                guest.selected = lstGuest.SelectedItem.ToString();
+            }
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -52,6 +53,8 @@ namespace Assessment2
             {
                 GuestDetails gd = new GuestDetails(guest, bindingguest, c, booking);
                 gd.ShowDialog();
+                booking.TotalStayPrice = booking.TotalStayPrice + guest.agePrice();
+                MessageBox.Show(c.Name);
             }
             else
             {
@@ -66,7 +69,7 @@ namespace Assessment2
             if (!(lstGuest.SelectedIndex == -1))
             {
                 EditGuest eg = new EditGuest(guest, bindingguest);
-              
+
                 string[] item = guest.selected.Split('|');
                 eg.txtEditName.Text = item[0];
                 eg.txtEditAge.Text = item[1];
@@ -86,17 +89,10 @@ namespace Assessment2
             btnAdd.IsEnabled = true;
             btnCalculate.IsEnabled = false;
 
-            booking.Arrival_date = dtpArrival.SelectedDate.GetValueOrDefault();
-            booking.Departure_date = dtpDeparture.SelectedDate.GetValueOrDefault();
-
-            int stayPrice = guest.agePrice();
-            int stay = booking.getDuration();
-            int cost = stayPrice * stay;
-
+   
             data.DBConnect();
             data.InsertCustomer(c.Name, c.Address);
 
-            //Not saving the month
             data.InsertBooking(booking.Arrival_date.ToString("yyyy-MM-dd"), booking.Departure_date.ToString("yyyy-MM-dd"), c.CustomerRef);
             MessageBox.Show(booking.Arrival_date.Date.ToString("yyyy-MM-dd"));
 
@@ -112,6 +108,62 @@ namespace Assessment2
                 bindingguest.RemoveAt(lstGuest.SelectedIndex);
             }
 
+        }
+
+        private void Invoice_Click(object sender, RoutedEventArgs e)
+        {
+            guest.NoOfGuests = lstGuest.Items.Count;
+            booking.Cost = (booking.TotalStayPrice * booking.getDuration()) + booking.Breakfast + booking.Dinner + booking.CarHire;
+
+            booking.Arrival_date = dtpArrival.SelectedDate.GetValueOrDefault();
+            booking.Departure_date = dtpDeparture.SelectedDate.GetValueOrDefault();
+
+            data.DBConnect();
+            data.InsertCustomer(c.Name, c.Address);
+
+            data.InsertBooking(booking.Arrival_date.ToString("yyyy-MM-dd"), booking.Departure_date.ToString("yyyy-MM-dd"), c.CustomerRef);
+            MessageBox.Show(booking.Arrival_date.Date.ToString("yyyy-MM-dd"));
+
+            Invoice invoice = new Invoice(c, guest, booking);
+            invoice.lblCustRef.Content = c.CustomerRef.ToString();
+            invoice.lblCustName.Content = c.Name;
+            invoice.lblCustAdd.Content = c.Address;
+            invoice.lblArrival.Content = booking.Arrival_date.ToString("dd-MM-yyyy").ToString();
+            invoice.lblDeparture.Content = booking.Departure_date.ToString("dd-MM-yyyy").ToString();
+            invoice.lblDuration.Content = booking.getDuration().ToString();
+            invoice.lblGuests.Content = guest.NoOfGuests.ToString();
+            invoice.lblPriceOfStay.Content = "£"+(booking.TotalStayPrice* booking.getDuration()).ToString();
+            invoice.lblExtras.Content = "£" + (booking.Breakfast + booking.Dinner + booking.CarHire).ToString();
+            invoice.lblTotal.Content = "£" + booking.Cost;
+            invoice.lblBreakfast.Content = "£" + booking.Breakfast.ToString();
+            invoice.lblDinner.Content = "£" + booking.Dinner.ToString();
+            invoice.lblCarHire.Content = "£" + booking.CarHire.ToString();
+
+            invoice.ShowDialog();
+        }
+
+        private void ckbBreakfast_Checked(object sender, RoutedEventArgs e)
+        {
+            if (ckbBreakfast.IsChecked == true)
+            {
+                booking.Breakfast = (booking.getDuration() * 5) * guest.NoOfGuests;
+            }
+        }
+
+        private void ckbDinner_Checked(object sender, RoutedEventArgs e)
+        {
+            if (ckbDinner.IsChecked == true)
+            {
+                booking.Dinner = (booking.getDuration() * 15) * guest.NoOfGuests;
+            }
+        }
+
+        private void ckbCar_Checked(object sender, RoutedEventArgs e)
+        {
+            if (ckbCar.IsChecked == true)
+            {
+                booking.CarHire = 50;
+            }
         }
     }
 }
