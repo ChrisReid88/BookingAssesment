@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SingletonDBConnect.cs" />
     <Page Include="BookingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -101,7 +102,7 @@
       <DependentUpon>BookingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Customer.cs" />
-    <Compile Include="Database.cs" />
+    <Compile Include="DatabaseFacade.cs" />
     <Compile Include="EditBooking.xaml.cs">
       <DependentUpon>EditBooking.xaml</DependentUpon>
     </Compile>

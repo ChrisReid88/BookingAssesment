@@ -35,7 +35,7 @@ namespace Assessment2
         //Creates a new booking, using the customer details added
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
-         if (!(txtCustName.Text == "" && txtCustAddress.Text == ""))
+            if (!(txtCustName.Text == "" && txtCustAddress.Text == ""))
             {
                 //Creates new instance of booking window and assigns customer details rom textboxes to labels for reference.
                 BookingWindow bw = new BookingWindow(c, data);
@@ -56,41 +56,59 @@ namespace Assessment2
             {
                 MessageBox.Show("Please insert new customer details to create a booking.");
             }
-            
-   
+
+
         }
 
         //Enables user to edit a customers details
         private void btnEditCust_Click(object sender, RoutedEventArgs e)
         {
-            //Pulls customer details from the database using the customer reference number entered in textbox
-            data.DBConnect();
-            Customer c2 = data.SetCustomer(Int32.Parse(txtEditCustP.Text));
+            try
+            {
+                //Pulls customer details from the database using the customer reference number entered in textbox
+                data.DBConnect();
+                Customer c2 = data.SetCustomer(Int32.Parse(txtEditCustP.Text));
 
-            //Creates a new 'edit customer' window and loads current customer values into the relevant textboxes, then displays the window 
-            EditCustomer ec = new EditCustomer(c2);
-            ec.txtEditCustRef.Text = txtEditCustP.Text;
-            ec.txtEditCustName.Text = c2.Name;
-            ec.txtEditCustAddress.Text = c2.Address;
-            ec.ShowDialog();
+                //Creates a new 'edit customer' window and loads current customer values into the relevant textboxes, then displays the window 
+                EditCustomer ec = new EditCustomer(c2);
+                ec.txtEditCustRef.Text = txtEditCustP.Text;
+                ec.txtEditCustName.Text = c2.Name;
+                ec.txtEditCustAddress.Text = c2.Address;
+                ec.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
 
         //Loads a customer
         private void btnLoad_Click(object sender, RoutedEventArgs e)
         {
+
             //Pulls customer details from database using customer reference number entered
+            
             data.DBConnect();
             Customer c = data.SetCustomer(Int32.Parse(txtEditCustP.Text));
 
-            //Creates a new booking window and assigns the values from the customer query to labels on new booking window
-            BookingWindow bw = new BookingWindow(c, data);
-            bw.lblCustName.Content = c.Name;
-            bw.lblCustAddress.Content = c.Address;
+            if (c.CustomerRef == 0 )
+            {
+                 MessageBox.Show("Failed to find that customer. Please retry");
+            }
+            else
+            {
+                //Creates a new booking window and assigns the values from the customer query to labels on new booking window
+                BookingWindow bw = new BookingWindow(c, data);
+                bw.lblCustName.Content = c.Name;
+                bw.lblCustAddress.Content = c.Address;
 
-            //Opens the new booking window and hides current window
-            bw.Show();
-            this.Hide();
+                //Opens the new booking window and hides current window
+                bw.Show();
+                this.Hide();
+            }
+
         }
 
         //Manipulates the  layout of edit customer section
@@ -120,28 +138,35 @@ namespace Assessment2
             Customer customer = data.SetCustomer(booking.CustomerRef);
             Extras extras = data.SetExtras(Int32.Parse(txtBookingReference.Text));
 
-            //Create new 'edit booking' window and pass in classes
-            EditBooking eb = new EditBooking(booking, c, guest);
+            if (booking.BookingRef == 0)
+            {
+                MessageBox.Show("Failed to find that customer. Please retry");
+            }
+            else
+            {
+                //Create new 'edit booking' window and pass in classes
+                EditBooking eb = new EditBooking(booking, c, guest);
 
-            //Displays and sets the on the booking window to the values taken from the database
-            eb.lblBookingRef.Content = booking.BookingRef;
-            eb.dtpArrivalEdit.SelectedDate = booking.Arrival_date;
-            eb.dtpDepartureEdit.SelectedDate = booking.Departure_date;
-            eb.lblCustomerName.Content = customer.Name;
-            eb.lblCustomerRef.Content = customer.CustomerRef;
-            eb.txtDinnerDesc.Text = extras.DDesc;
-            eb.txtBreakfastDesc.Text = extras.BDesc;
-            eb.txtCarHireName.Text = extras.HireName;
-            eb.dtpHireStart.SelectedDate = extras.HireStart;
-            eb.dtpHireEnd.SelectedDate = extras.HireEnd;
- 
-            //Inserts list of guests taken from database into the combobox on the edit booking window
-            data.DBConnect();
-            eb.cbbGuests.ItemsSource = data.SetGuest(Int32.Parse(txtBookingReference.Text));
+                //Displays and sets the on the booking window to the values taken from the database
+                eb.lblBookingRef.Content = booking.BookingRef;
+                eb.dtpArrivalEdit.SelectedDate = booking.Arrival_date;
+                eb.dtpDepartureEdit.SelectedDate = booking.Departure_date;
+                eb.lblCustomerName.Content = customer.Name;
+                eb.lblCustomerRef.Content = customer.CustomerRef;
+                eb.txtDinnerDesc.Text = extras.DDesc;
+                eb.txtBreakfastDesc.Text = extras.BDesc;
+                eb.txtCarHireName.Text = extras.HireName;
+                eb.dtpHireStart.SelectedDate = extras.HireStart;
+                eb.dtpHireEnd.SelectedDate = extras.HireEnd;
 
-            //Show 'edit booking' window, close current window
-            eb.Show();
-            this.Close();
+                //Inserts list of guests taken from database into the combobox on the edit booking window
+                data.DBConnect();
+                eb.cbbGuests.ItemsSource = data.SetGuest(Int32.Parse(txtBookingReference.Text));
+
+                //Show 'edit booking' window, close current window
+                eb.Show();
+                this.Close();
+            }
         }
 
         //Manipulate the layout of the 'edit booking' section

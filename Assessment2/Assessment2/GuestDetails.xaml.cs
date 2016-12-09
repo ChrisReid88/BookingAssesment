@@ -40,16 +40,23 @@ namespace Assessment2
         //Adds guest to binding list/listbox and database
         private void btnGuestAdd_Click(object sender, RoutedEventArgs e)
         {
-            //Takes values from textbox and assigns them to appropriate guest property
-            db.DBConnect();
-            guest.Name = txtGuestName.Text;
-            guest.Age = int.Parse(txtGuestAge.Text);
-            guest.PassportNo = txtGuestPpNumber.Text;
+            try
+            {
+                //Takes values from textbox and assigns them to appropriate guest property
+                db.DBConnect();
+                guest.Name = txtGuestName.Text;
+                guest.Age = int.Parse(txtGuestAge.Text);
+                guest.PassportNo = txtGuestPpNumber.Text;
 
-            //Inserts guest properties to database and binding list
-            db.InsertGuest(guest.Name, guest.Age, guest.PassportNo, booking.BookingRef);
-            bindingguest.Add(guest);
-            this.Close();
+                //Inserts guest properties to database and binding list
+                db.InsertGuest(guest.Name, guest.Age, guest.PassportNo, booking.BookingRef);
+                bindingguest.Add(guest);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 

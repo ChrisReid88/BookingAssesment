@@ -38,19 +38,11 @@ namespace Assessment2
             }
             catch (MySqlException ex)
             {
-                switch (ex.Number)
-                {
-                    case 0:
-                        MessageBox.Show("Cannot connect to server.");
-                        break;
-
-                    case 1045:
-
-                        MessageBox.Show("Invalid username/password");
-                        break;
-                }
+                MessageBox.Show(ex.Message);
                 return false;
             }
+
+
         }
         private bool CloseConnection()
         {
@@ -345,7 +337,7 @@ namespace Assessment2
             }
             return ex;
         }
-        public void EditExtras(string breakdesc,string dindesc,string name, string start, string end,int bookingRef)
+        public void EditExtras(string breakdesc, string dindesc, string name, string start, string end, int bookingRef)
         {
             string query = "UPDATE extras SET bDesc='" + breakdesc + "',dDesc='" + dindesc + "',carHireName='" + name + "',hireStart='" + start + "',HireEnd='" + end + "' WHERE bookingRef=" + bookingRef + ";";
 

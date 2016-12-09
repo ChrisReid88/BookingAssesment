@@ -99,8 +99,7 @@ namespace Assessment2
 
         private void btnUpdateExtras_Click(object sender, RoutedEventArgs e)
         {
-            booking.HireStart = dtpHireStart.SelectedDate.GetValueOrDefault();
-            booking.HireEnd = dtpHireStart.SelectedDate.GetValueOrDefault();
+            
             data.DBConnect();
             data.EditExtras(txtBreakfastDesc.Text, txtDinnerDesc.Text, txtCarHireName.Text, booking.HireStart.ToString("yyyy-MM-dd"), booking.HireEnd.ToString("yyyy-MM-dd"), Int32.Parse(lblBookingRef.Content.ToString()));
             MessageBox.Show("Extras successfully update");
@@ -112,54 +111,54 @@ namespace Assessment2
         {
             data.DBConnect();
             Customer c2 = data.SetCustomer(Int32.Parse(lblCustomerRef.Content.ToString()));
-            //g.Age = Int32.Parse(txtEditGuestAge.Text);
+
+            //Get the car hire dates
+            booking.HireStart = dtpHireStart.SelectedDate.GetValueOrDefault();
+            booking.HireEnd = dtpHireEnd.SelectedDate.GetValueOrDefault();
 
             //Set number of guests and calculate the total price of the stay
-            g.NoOfGuests = cbbGuests.Items.Count;
-           
+            g.NoOfGuests = cbbGuests.Items.Count;  
 
             //Get the arrival and departure dates from the datepickers
             booking.Arrival_date = dtpArrivalEdit.SelectedDate.GetValueOrDefault();
             booking.Departure_date = dtpDepartureEdit.SelectedDate.GetValueOrDefault();
 
-            //Get the arrival and departure dates from the datepickers
-            booking.HireStart = dtpHireStart.SelectedDate.GetValueOrDefault();
-            booking.HireEnd = dtpHireStart.SelectedDate.GetValueOrDefault();
-
             //Calculating breakfast price by description box. (Needs changed)
             if (txtBreakfastDesc.Text != "")
             {
                 booking.Breakfast = booking.GetBreakfast() * g.NoOfGuests;
+                btnRemoveBreakfast.IsEnabled = true;
             }
             else
             {
+                btnRemoveBreakfast.IsEnabled = false;
                 booking.Breakfast = 0;
             }
 
             //Calculating Dinner price by description box. (Needs changed)
-            if (txtBreakfastDesc.Text != "")
-            {
-                booking.Breakfast = booking.GetBreakfast() * g.NoOfGuests;
-                btnRemoveBreakfast.IsEnabled = true;
-            }
-            else
-            {
-                btnRemoveBreakfast.IsEnabled = false;
-                booking.Dinner = 0;
-            }
-
             if (txtDinnerDesc.Text != "")
             {
                 booking.Dinner = booking.GetDinner() * g.NoOfGuests;
-                btnRemoveBreakfast.IsEnabled = true;
+                btnRemoveDinner.IsEnabled = true;
             }
             else
             {
-                btnRemoveBreakfast.IsEnabled = false;
+                btnRemoveDinner.IsEnabled = false;
                 booking.Dinner = 0;
             }
 
-            booking.CarHire = booking.getHireDuration() * 50;
+            //Calculating car hire price by description box. (Needs changed)
+            if (txtCarHireName.Text != "")
+            {
+                booking.CarHire = booking.getHireDuration() * 50;
+                btnRemoveCarHire.IsEnabled = true;
+            }
+            else
+            {
+                btnRemoveCarHire.IsEnabled = false;
+                booking.Dinner = 0;
+            }
+
             MessageBox.Show(booking.getHireDuration() + "");
 
             //Calculating the price to stay
@@ -182,6 +181,7 @@ namespace Assessment2
             invoice.lblBreakfast.Content = "£" + booking.Breakfast.ToString();
             invoice.lblDinner.Content = "£" + booking.Dinner.ToString();
             invoice.lblCarHire.Content = "£" + booking.CarHire.ToString();
+            invoice.lblCarHireDuration.Content = booking.getHireDuration().ToString();
 
             invoice.ShowDialog();
         }

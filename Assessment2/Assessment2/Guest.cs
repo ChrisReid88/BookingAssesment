@@ -29,7 +29,17 @@ namespace Assessment2
         public string Name
         {
             get { return name; }
-            set { name = value; }
+            set
+            {
+                if (Name != String.Empty || Name != null)
+                {
+                    name = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Name cannot be null or empty string");
+                }
+            }
         }
 
         //Proterty for manipulating guests age
@@ -43,9 +53,18 @@ namespace Assessment2
         public string PassportNo
         {
             get { return passportNo; }
-            set { passportNo = value; }
+            set
+            {
+                if (passportNo!= String.Empty || Name != null)
+                {
+                    passportNo = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Name cannot be null or empty string");
+                }
+            }
         }
-
         //Proterty for manipulating the amount of guests staying
         public int NoOfGuests
         {

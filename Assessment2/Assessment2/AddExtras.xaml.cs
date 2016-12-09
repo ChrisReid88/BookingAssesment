@@ -43,6 +43,17 @@ namespace Assessment2
             b.HireStart= dtpHireStart.SelectedDate.GetValueOrDefault();
             b.HireEnd = dtpHireEnd.SelectedDate.GetValueOrDefault();
 
+            //If left blank, add none to database
+            if (txtBreakDesc.Text == "")
+            {
+                txtBreakDesc.Text = "None";
+            }
+
+            //If left blank, add none to database
+            if (txtDinDesc.Text == "")
+            {
+                txtDinDesc.Text = "None";
+            }
             //Inserts the values into the database
             data.DBConnect();
             data.InsertExtras(txtBreakDesc.Text, txtDinDesc.Text, txtDriverName.Text, b.HireStart.ToString("yyyy-MM-dd"), b.HireEnd.ToString("yyyy-MM-dd"), b.BookingRef);

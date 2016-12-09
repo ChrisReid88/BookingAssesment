@@ -155,9 +155,36 @@ namespace Assessment2
         //Creates and populates an invoice
         private void Invoice_Click(object sender, RoutedEventArgs e)
         {
-            //Set number of guests and calculate the total price of the stay
+
+
+            //count number of guest
             guest.NoOfGuests = lstGuest.Items.Count;
+
+            //if checkbox breakfast is checked, calculate the price of breakfast * number of guests
+            if (ckbBreakfast.IsChecked == true)
+            {
+                booking.Breakfast = booking.GetBreakfast() * guest.NoOfGuests;
+            }
+            else
+            {
+                booking.Breakfast = 0;
+            }
+
+            //if checkbox ddinner is checked, calculate the price of breakfast * number of guests
+            if (ckbDinner.IsChecked == true)
+            {
+                booking.Dinner = booking.GetDinner() * guest.NoOfGuests;
+            }
+            else
+            {
+                booking.Dinner = 0;
+            }
+
+            //Calculate the cost of the whole booking
             booking.Cost = (booking.TotalStayPrice * booking.getDuration()) + booking.Breakfast + booking.Dinner + booking.CarHire;
+
+            //Get the duration of the car hire
+            booking.CarHire = booking.getHireDuration() * 50;
 
             //Get the arrival and departure dates from the datepickers
             booking.Arrival_date = dtpArrival.SelectedDate.GetValueOrDefault();
@@ -171,7 +198,7 @@ namespace Assessment2
             invoice.lblCustAdd.Content = c.Address;
             invoice.lblArrival.Content = booking.Arrival_date.ToString("dd-MM-yyyy").ToString();
             invoice.lblDeparture.Content = booking.Departure_date.ToString("dd-MM-yyyy").ToString();
-            invoice.lblDuration.Content = booking.getDuration().ToString();
+            invoice.lblDuration.Content = booking.getDuration().ToString() + " nights";
             invoice.lblGuests.Content = guest.NoOfGuests.ToString();
             invoice.lblPriceOfStay.Content = "£" + (booking.TotalStayPrice * booking.getDuration()).ToString();
             invoice.lblExtras.Content = "£" + (booking.Breakfast + booking.Dinner + booking.CarHire).ToString();
@@ -179,11 +206,12 @@ namespace Assessment2
             invoice.lblBreakfast.Content = "£" + booking.Breakfast.ToString();
             invoice.lblDinner.Content = "£" + booking.Dinner.ToString();
             invoice.lblCarHire.Content = "£" + booking.CarHire.ToString();
+            invoice.lblPricePerNight.Content = "£" + booking.TotalStayPrice.ToString();
+            invoice.lblCarHireDuration.Content = booking.getHireDuration().ToString() + " days";
 
             invoice.ShowDialog();
             this.Close();
         }
-
 
         //Enables the user to progress to the next part of the new booking 
         private void btnNewBooking_Click(object sender, RoutedEventArgs e)
@@ -222,6 +250,9 @@ namespace Assessment2
         {
             //Create new 'Add extras' window and pass in the booking
             AddExtras ex = new AddExtras(booking);
+
+            booking.HireStart = ex.dtpHireStart.SelectedDate.GetValueOrDefault();
+            booking.HireEnd = ex.dtpHireStart.SelectedDate.GetValueOrDefault();
 
             //Manipulate which controls will be enables via the checked checkboxes
             if (ckbBreakfast.IsChecked == true)
