@@ -26,7 +26,6 @@ namespace Assessment2
         {
             InitializeComponent();
             this.c = c;
-            //data.SetCust(Int32.Parse(txtEditCustRef.Text));     
         }
 
         private void btnEditCustomer_Click(object sender, RoutedEventArgs e)

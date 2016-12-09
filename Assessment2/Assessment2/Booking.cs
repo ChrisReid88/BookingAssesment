@@ -12,6 +12,7 @@ namespace Assessment2
         private DateTime arrival_date;
         private DateTime departure_date;
         private int bookingRef;
+        private int customerRef;
         private int totalStayPrice;
         private int cost;
 
@@ -22,6 +23,12 @@ namespace Assessment2
             get { return bookingRef; }
             set { bookingRef = value; }
         }
+        public int CustomerRef
+        {
+            get { return bookingRef; }
+            set { bookingRef = value; }
+        }
+
 
         public int TotalStayPrice
         {

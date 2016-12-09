@@ -20,11 +20,8 @@ namespace Assessment2
     /// </summary>
     public partial class MainWindow : Window
     {
-
         Database data = new Database();
         Customer c = new Customer();
-        Customer c2 = new Customer();
-
 
         public MainWindow()
         {
@@ -40,7 +37,8 @@ namespace Assessment2
                 c.Address = txtCustAddress.Text;
                 bw.lblCustName.Content = txtCustName.Text;
                 bw.lblCustAddress.Content = txtCustAddress.Text;
-
+                data.DBConnect();
+                data.InsertCustomer(c.Name, c.Address);
                 bw.Show();
                 this.Hide();
             }
@@ -53,25 +51,56 @@ namespace Assessment2
         private void btnEditCust_Click(object sender, RoutedEventArgs e)
         {
 
-            EditCustomer ec = new EditCustomer(c);
             data.DBConnect();
+            Customer c2 = data.SetCustomer(Int32.Parse(txtEditCustP.Text));
+            EditCustomer ec = new EditCustomer(c2);
             ec.txtEditCustRef.Text = txtEditCustP.Text;
-
-            // data.SetCust(c2.Name, c2.Address, c2.CustomerRef);
-            //c2.Name = ec.txtEditCustName.Text;
-            // c.Address = ec.txtEditCustAddress.Text;
-
-
+            ec.txtEditCustName.Text = c2.Name;
+            ec.txtEditCustAddress.Text = c2.Address;
             ec.ShowDialog();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnLoad_Click(object sender, RoutedEventArgs e)
         {
+            data.DBConnect();
+            Customer c = data.SetCustomer(Int32.Parse(txtEditCustP.Text));
+            BookingWindow bw = new BookingWindow(c, data);
+            bw.lblCustName.Content = c.Name;
+            bw.lblCustAddress.Content = c.Address;
+            bw.Show();
+            this.Hide();
+        }
+
+        private void txtEditCustP_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(txtEditCustP.Text != "")
+            {
+                btnLoad.IsEnabled = true;
+                btnEditCust.IsEnabled = true;
+            }
+        }
+
+        private void btnLoadBooking_Click(object sender, RoutedEventArgs e)
+        {
+            data.DBConnect();
+            Booking booking = data.SetBooking(Int32.Parse(txtBookingReference.Text));
+            Customer customer = data.SetCustomer(booking.CustomerRef);
+            EditBooking eb = new EditBooking(booking, c);
+
+            eb.lblBookingRef.Content = booking.BookingRef;
+            eb.dtpArrivalEdit.SelectedDate = booking.Arrival_date;
+            eb.dtpDepartureEdit.SelectedDate = booking.Departure_date;
+            eb.lblCustomerName.Content = customer.Name;
+            eb.lblCustomerRef.Content = customer.CustomerRef;
 
             data.DBConnect();
-            Guest g = data.SetGuest(txt1.Text);
-            txt2.Text = g.Age.ToString();
-           
+            eb.cbbGuests.ItemsSource = data.SetGuest(Int32.Parse(txtBookingReference.Text));
+
+            eb.Show();
+            this.Close();
+
         }
+
+
     }
 }

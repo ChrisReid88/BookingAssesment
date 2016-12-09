@@ -15,28 +15,14 @@ namespace Assessment2
         public string Name
         {
             get { return name; }
-            set
-            {
-                if (value == "")
-                {
-                    throw new ArgumentException("Please enter the customer name.");
-                }
-                name = value;
-            }
+            set { name = value; }
 
         }
 
         public string Address
         {
             get { return address; }
-            set
-            {
-                if (value == "")
-                {
-                    throw new ArgumentException("Please enter the customer address.");
-                }
-                address = value;
-            }
+            set { address = value; }
 
         }
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using System.ComponentModel;
 
 namespace Assessment2
 {
@@ -20,7 +21,7 @@ namespace Assessment2
         {
             try
             {
-                string DBdetails = "server=127.0.0.1;database=40202859;uid=root;pwd=;";
+                string DBdetails = "server=127.0.0.1;database=database;uid=root;pwd=;";
                 conn = new MySqlConnection(DBdetails);
             }
             catch (Exception ex)
@@ -124,29 +125,27 @@ namespace Assessment2
             if (this.OpenConnection() == true)
             {
                 MySqlCommand cmd = new MySqlCommand(query, conn);
-                cmd.CommandText = query;
                 cmd.ExecuteNonQuery();
                 this.CloseConnection();
             }
         }
 
-        public Guest SetGuest(string passportNo)
+        public List<Guest> SetGuest(int bookingRef)
         {
-            string query = "SELECT guestName, age, passportNo FROM guest WHERE passportNo='" + passportNo + "';";
-            MySqlDataReader sdr;
-            Guest guest = new Guest();
-
+            string query = "SELECT guestName, age, passportNo FROM guest WHERE bookingRef=" + bookingRef + ";";
+            MySqlDataReader sdr; 
+            List<Guest> guest = new List<Guest>();
             if (this.OpenConnection() == true)
             {
                 MySqlCommand comm = new MySqlCommand(query, conn);
-                comm.CommandText = query;
                 sdr = comm.ExecuteReader();
                 while (sdr.Read())
                 {
-
-                    guest.Name = sdr.GetString(0);
-                    guest.Age = Int32.Parse(sdr.GetString(1));
-                    guest.PassportNo = sdr.GetString(2);
+                    Guest g = new Guest();
+                    g.Name = sdr.GetString(0);
+                    g.Age = Int32.Parse(sdr.GetString(1));
+                    g.PassportNo = sdr.GetString(2);
+                    guest.Add(g);
 
                 }
 
@@ -154,6 +153,7 @@ namespace Assessment2
                 this.CloseConnection();
             }
             return guest;
+           
         }
 
         public void EditGuest(string name, int age, string passportNo)
@@ -193,10 +193,11 @@ namespace Assessment2
                 this.CloseConnection();
             }
         }
-        public void SetCust(string name, string address, int customerRef)
+        public Customer SetCustomer(int customerRef)
         {
-            string query = "SELECT name, address, customerRef FROM customer WHERE customerRef='" + customerRef + "';";
+            string query = "SELECT customerRef, name, address FROM customer WHERE customerRef='" + customerRef + "';";
             MySqlDataReader sdr;
+            Customer customer = new Customer();
 
             if (this.OpenConnection() == true)
             {
@@ -205,18 +206,17 @@ namespace Assessment2
                 sdr = comm.ExecuteReader();
                 while (sdr.Read())
                 {
-                    name = sdr.GetString(0);
-                    address = sdr.GetString(1);
-                    customerRef = Int32.Parse(sdr.GetString(2));
+                    customer.CustomerRef = Int32.Parse(sdr.GetString(0));
+                    customer.Name = sdr.GetString(1);
+                    customer.Address = sdr.GetString(2);
                 }
                 sdr.Close();
                 this.CloseConnection();
             }
+            return customer;
         }
         public void EditCust(string name, string address, int customerRef)
         {
-
-
             string query2 = "UPDATE customer SET name='" + name + "',address='" + address + "',customerRef=" + customerRef + " WHERE customerRef=" + customerRef + ";";
             MySqlDataReader sdr2;
 
@@ -230,9 +230,44 @@ namespace Assessment2
                     customerRef = Int32.Parse(sdr2.GetString(0));
                     name = sdr2.GetString(1);
                     address = sdr2.GetString(2);
-
                 }
                 sdr2.Close();
+                this.CloseConnection();
+            }
+        }
+        public Booking SetBooking(int bookingRef)
+        {
+            string query = "SELECT bookingRef, arrival, departure, customerRef FROM booking WHERE bookingRef=" + bookingRef + ";";
+            MySqlDataReader sdr;
+            Booking booking = new Booking();
+
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand comm = new MySqlCommand(query, conn);
+                comm.CommandText = query;
+                sdr = comm.ExecuteReader();
+                while (sdr.Read())
+                {
+                    booking.BookingRef = Int32.Parse(sdr.GetString(0));
+                    booking.Arrival_date = Convert.ToDateTime(sdr.GetString(1));
+                    booking.Departure_date = Convert.ToDateTime(sdr.GetString(2));
+                    booking.CustomerRef = Int32.Parse(sdr.GetString(3));
+
+                }
+                sdr.Close();
+                this.CloseConnection();
+            }
+            return booking;
+        }
+
+        public void EditBooking(string arrival, string departure)
+        {
+            string query = "UPDATE booking SET arrival='" + arrival + "',departure='" + departure + "';";
+
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.ExecuteNonQuery();
                 this.CloseConnection();
             }
         }

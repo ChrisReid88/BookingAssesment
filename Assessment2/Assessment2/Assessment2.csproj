@@ -64,6 +64,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="EditBooking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditCustomer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -94,6 +98,9 @@
     </Compile>
     <Compile Include="Customer.cs" />
     <Compile Include="Database.cs" />
+    <Compile Include="EditBooking.xaml.cs">
+      <DependentUpon>EditBooking.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditCustomer.xaml.cs">
       <DependentUpon>EditCustomer.xaml</DependentUpon>
     </Compile>

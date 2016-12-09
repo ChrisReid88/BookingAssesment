@@ -1,25 +1,32 @@
 ﻿<Window x:Class="Assessment2.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="350">
+        Title="MainWindow" Height="500
+        " Width="350">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="15*"/>
             <RowDefinition Height="304*"/>
         </Grid.RowDefinitions>
-        <Label Content="Name" HorizontalAlignment="Left" Margin="50,41,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <Label Content="Address" HorizontalAlignment="Left" Margin="50,101,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <TextBox x:Name="txtCustName" HorizontalAlignment="Left" Height="23" Margin="181,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
-        <TextBox x:Name="txtCustAddress" HorizontalAlignment="Left" Height="23" Margin="181,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.272,-0.352" Grid.Row="1"/>
-        <Button x:Name="btnOk" Content="Add Customer" HorizontalAlignment="Left" Margin="72,132,0,0" VerticalAlignment="Top" Width="86" Click="btnOk_Click" Grid.Row="1"/>
-        <Button x:Name="btnEditCust" Content="Edit" HorizontalAlignment="Left" Margin="134,263,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.053,0.35" Click="btnEditCust_Click"/>
-        <TextBox x:Name="txtEditCustP" HorizontalAlignment="Left" Height="23" Margin="181,223,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="50,308,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Content="Address" HorizontalAlignment="Left" Margin="50,356,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <TextBox x:Name="txtCustName" HorizontalAlignment="Left" Height="23" Margin="181,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
+        <TextBox x:Name="txtCustAddress" HorizontalAlignment="Left" Height="23" Margin="181,359,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.272,-0.352" Grid.Row="1"/>
+        <Button x:Name="btnOk" Content="New Customer" HorizontalAlignment="Left" Margin="130,412,0,0" VerticalAlignment="Top" Width="86" Click="btnOk_Click" Grid.Row="1"/>
+        <Button x:Name="btnEditCust" Content="Edit Details" HorizontalAlignment="Left" Margin="64,97,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.053,0.35" Click="btnEditCust_Click" IsEnabled="False"/>
+        <TextBox x:Name="txtEditCustP" HorizontalAlignment="Left" Height="23" Margin="202,56,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="txtEditCustP_TextChanged"/>
         <TextBlock HorizontalAlignment="Center" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="342" FontFamily="Segoe UI Black" FontSize="20" Background="#FFB8B8B8" Grid.RowSpan="2"><Run Language="en-gb" Text="              "/><Run Text="Napier Holiday Villa"/></TextBlock>
-        <Label Content="Enter Customer Reference" HorizontalAlignment="Left" Margin="10,223,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Separator HorizontalAlignment="Left" Height="4" Margin="0,196,0,0" Grid.Row="1" VerticalAlignment="Top" Width="342"/>
-        <TextBox x:Name="txt1" HorizontalAlignment="Left" Height="23" Margin="201,132,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="83,167,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <TextBox x:Name="txt2" HorizontalAlignment="Left" Height="23" Margin="201,177,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Enter Customer Reference" HorizontalAlignment="Left" Margin="31,56,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Separator HorizontalAlignment="Left" Height="4" Margin="0,252,0,0" Grid.Row="1" VerticalAlignment="Top" Width="342"/>
+        <Button x:Name="btnLoad" Content="New booking" HorizontalAlignment="Left" Margin="202,97,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btnLoad_Click" IsEnabled="False"/>
+        <Label Content="New Customer" HorizontalAlignment="Left" Margin="0,270,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+        <Label Content="Existing Customer" HorizontalAlignment="Left" Margin="10,23,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+        <Separator HorizontalAlignment="Left" Height="4" Margin="0,122,0,0" Grid.Row="1" VerticalAlignment="Top" Width="342"/>
+        <Label Content="Edit Booking" HorizontalAlignment="Left" Margin="10,131,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+        <Label Content="Enter Booking Reference" HorizontalAlignment="Left" Margin="31,162,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtBookingReference" HorizontalAlignment="Left" Height="23" Margin="202,165,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnLoadBooking" Content="Edit" HorizontalAlignment="Left" Margin="64,211,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btnLoadBooking_Click"/>
+        <Button x:Name="btnDeleteBooking" Content="Delete" HorizontalAlignment="Left" Margin="202,211,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>
