@@ -10,7 +10,7 @@
         <Label Content="Age" HorizontalAlignment="Left" Margin="22,107,0,0" VerticalAlignment="Top"/>
         <Label Content="Passport Number" HorizontalAlignment="Left" Margin="22,156,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnGuestAdd" Content="Add" HorizontalAlignment="Left" Margin="53,224,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.5,0.5" Click="btnGuestAdd_Click"/>
-        <Button x:Name="btnGuestCancel" Content="Cancel" HorizontalAlignment="Left" Margin="159,224,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnGuestCancel" Content="Cancel" HorizontalAlignment="Left" Margin="159,224,0,0" VerticalAlignment="Top" Width="75" Click="btnGuestCancel_Click"/>
         <TextBlock HorizontalAlignment="Center" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="292" FontFamily="Segoe UI Black" FontSize="20" Background="#FFB8B8B8"><Run Language="en-gb" Text="        "/><Run Text="Napier Holiday Villa"/></TextBlock>
 
     </Grid>

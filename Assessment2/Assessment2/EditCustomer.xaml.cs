@@ -19,6 +19,7 @@ namespace Assessment2
     /// </summary>
     public partial class EditCustomer : Window
     {
+        //Customer for reference
         private Customer c;
         Database data = new Database();
 
@@ -28,13 +29,18 @@ namespace Assessment2
             this.c = c;
         }
 
+        //Applies the changes of the customer 
         private void btnEditCustomer_Click(object sender, RoutedEventArgs e)
         {
+            //Takes the imputs of the textboxes and updates the database
             data.DBConnect();
             data.EditCust(txtEditCustName.Text, txtEditCustAddress.Text, Int32.Parse(txtEditCustRef.Text));
+
+            //Closes this window
             this.Close();
         }
 
+        //Cancel button closes this window without changing any of the customer details
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

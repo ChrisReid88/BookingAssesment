@@ -26,25 +26,36 @@ namespace Assessment2
         Database db = new Database();
         private Booking booking;
 
+
+        //Passing references
         public GuestDetails(Guest guest, BindingList<Guest> bindingguest, Customer c, Booking booking)
         {
             InitializeComponent();
-
             this.guest = guest;
             this.bindingguest = bindingguest;
             this.c = c;
             this.booking = booking;
         }
+
+        //Adds guest to binding list/listbox and database
         private void btnGuestAdd_Click(object sender, RoutedEventArgs e)
         {
+            //Takes values from textbox and assigns them to appropriate guest property
             db.DBConnect();
             guest.Name = txtGuestName.Text;
             guest.Age = int.Parse(txtGuestAge.Text);
             guest.PassportNo = txtGuestPpNumber.Text;
+
+            //Inserts guest properties to database and binding list
             db.InsertGuest(guest.Name, guest.Age, guest.PassportNo, booking.BookingRef);
             bindingguest.Add(guest);
             this.Close();
 
+        }
+
+        private void btnGuestCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Assessment2
     /// </summary>
     public partial class Invoice : Window
     {
-
+        //Simple invoice window to display booking details and costs
         private Customer c;
         private Guest guest;
         private Booking booking;

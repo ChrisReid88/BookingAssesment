@@ -20,10 +20,13 @@ namespace Assessment2
     /// </summary>
     public partial class EditGuest : Window
     {
+
+        //New instance of database and private guest and bindinglist for reference
         Database data = new Database();
         private Guest guest;
         private BindingList<Guest> bindingguest;
 
+        
         public EditGuest(Guest guest, BindingList<Guest> bindingguest)
         {
             InitializeComponent();
@@ -31,14 +34,20 @@ namespace Assessment2
             this.bindingguest = bindingguest;
         }
 
+        //Amends the guest details 
         private void btnAmend_Click(object sender, RoutedEventArgs e)
         {
+            //sets the values from the textboxes to the guest properties
             data.DBConnect();
             guest.Name = txtEditName.Text;
             guest.Age = int.Parse(txtEditAge.Text);
             guest.PassportNo = txtEditPp.Text;
+
+            //Updates the database and list
             data.EditGuest(txtEditName.Text, Int32.Parse(txtEditAge.Text), txtEditPp.Text);
             bindingguest.Add(guest);
+            
+            //Closes this window
             this.Close();
             
         }

@@ -76,6 +76,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AddExtras.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GuestDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -108,6 +112,9 @@
       <DependentUpon>EditGuest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extras.cs" />
+    <Compile Include="AddExtras.xaml.cs">
+      <DependentUpon>AddExtras.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Guest.cs" />
     <Compile Include="GuestDetails.xaml.cs">
       <DependentUpon>GuestDetails.xaml</DependentUpon>

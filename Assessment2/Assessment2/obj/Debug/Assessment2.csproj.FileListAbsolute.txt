@@ -84,3 +84,5 @@ C:\Users\Chris\Documents\Assessment2\assessment2\Assessment2\Assessment2\obj\Deb
 C:\Users\Chris\Documents\Assessment2\assessment2\Assessment2\Assessment2\obj\Debug\Assessment2.csprojResolveAssemblyReference.cache
 C:\Users\Chris\Documents\Assessment2\assessment2\Assessment2\Assessment2\obj\Debug\EditBooking.baml
 C:\Users\Chris\Documents\Assessment2\assessment2\Assessment2\Assessment2\obj\Debug\EditBooking.g.cs
+C:\Users\Chris\Documents\Assessment2\assessment2\Assessment2\Assessment2\obj\Debug\AddExtras.baml
+C:\Users\Chris\Documents\Assessment2\assessment2\Assessment2\Assessment2\obj\Debug\AddExtras.g.cs

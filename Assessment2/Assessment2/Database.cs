@@ -21,7 +21,7 @@ namespace Assessment2
         {
             try
             {
-                string DBdetails = "server=127.0.0.1;database=database;uid=root;pwd=;";
+                string DBdetails = "server=127.0.0.1;database=40202859;uid=root;pwd=;";
                 conn = new MySqlConnection(DBdetails);
             }
             catch (Exception ex)
@@ -74,7 +74,6 @@ namespace Assessment2
             if (this.OpenConnection() == true)
             {
                 MySqlCommand comm = new MySqlCommand(bookingRef, conn);
-                comm.CommandText = bookingRef;
                 sdr = comm.ExecuteReader();
                 while (sdr.Read())
                     bookRef = Int32.Parse(sdr.GetString(0));
@@ -91,7 +90,6 @@ namespace Assessment2
                 this.CloseConnection();
             }
         }
-
         public void InsertCustomer(string name, string address)
         {
             string query = "INSERT INTO `customer`(`name`, `address`) VALUES ('" + name + "','" + address + "');";
@@ -103,7 +101,6 @@ namespace Assessment2
                 this.CloseConnection();
             }
         }
-
         public void InsertBooking(string arrival, string departure, int customerref)
         {
             string custRef = "SELECT MAX(customerRef) FROM customer";
@@ -129,11 +126,10 @@ namespace Assessment2
                 this.CloseConnection();
             }
         }
-
         public BindingList<Guest> SetGuest(int bookingRef)
         {
             string query = "SELECT guestName, age, passportNo FROM guest WHERE bookingRef=" + bookingRef + ";";
-            MySqlDataReader sdr; 
+            MySqlDataReader sdr;
             BindingList<Guest> guest = new BindingList<Guest>();
             if (this.OpenConnection() == true)
             {
@@ -153,9 +149,8 @@ namespace Assessment2
                 this.CloseConnection();
             }
             return guest;
-           
-        }
 
+        }
         public void EditGuest(string name, int age, string passportNo)
         {
             string query2 = "UPDATE guest SET guestName='" + name + "',age=" + age + ",passportNo='" + passportNo + "' WHERE passportNo='" + passportNo + "';";
@@ -175,7 +170,6 @@ namespace Assessment2
                 this.CloseConnection();
             }
         }
-
         public void DeleteGuest(string passportNo)
         {
             string query2 = "DELETE FROM guest WHERE passportNo='" + passportNo + "';";
@@ -259,7 +253,6 @@ namespace Assessment2
             }
             return booking;
         }
-
         public void EditBooking(string arrival, string departure)
         {
             string query = "UPDATE booking SET arrival='" + arrival + "',departure='" + departure + "';";
@@ -285,6 +278,81 @@ namespace Assessment2
                     bookingRef = Int32.Parse(sdr.GetString(2));
                 }
                 sdr.Close();
+                this.CloseConnection();
+            }
+        }
+        public void DeleteCustomer(int customerRef)
+        {
+            string query2 = "DELETE FROM customer WHERE customerRef='" + customerRef + "';";
+
+            if (this.OpenConnection() == true)
+            {
+                MySqlDataReader sdr;
+                MySqlCommand comm = new MySqlCommand(query2, conn);
+                sdr = comm.ExecuteReader();
+                while (sdr.Read())
+                {
+                    customerRef = Int32.Parse(sdr.GetString(2));
+                }
+                sdr.Close();
+                this.CloseConnection();
+            }
+        }
+        public void InsertExtras(string bdesc, string ddesc, string hireName, string start, string end, int bookingRef)
+        {
+            string bookRef = "SELECT MAX(bookingRef) FROM booking";
+            MySqlDataReader sdr;
+
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand comm = new MySqlCommand(bookRef, conn);
+                sdr = comm.ExecuteReader();
+                while (sdr.Read())
+                    bookingRef = Int32.Parse(sdr.GetString(0));
+                sdr.Close();
+                this.CloseConnection();
+            }
+            string query = "INSERT INTO `extras` VALUES ('extraid','" + bdesc + "','" + ddesc + "','" + hireName + "','" + start + "','" + end + "'," + bookingRef + ");";
+
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.ExecuteNonQuery();
+                this.CloseConnection();
+            }
+        }
+        public Extras SetExtras(int bookingRef)
+        {
+            string query = "SELECT bDesc, dDesc, carHireName,hireStart,HireEnd FROM extras WHERE bookingRef='" + bookingRef + "';";
+            MySqlDataReader sdr;
+            Extras ex = new Extras();
+
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand comm = new MySqlCommand(query, conn);
+                comm.CommandText = query;
+                sdr = comm.ExecuteReader();
+                while (sdr.Read())
+                {
+                    ex.BDesc = sdr.GetString(0);
+                    ex.DDesc = sdr.GetString(1);
+                    ex.HireName = sdr.GetString(2);
+                    ex.HireStart = Convert.ToDateTime(sdr.GetString(3));
+                    ex.HireEnd = Convert.ToDateTime(sdr.GetString(4));
+                }
+                sdr.Close();
+                this.CloseConnection();
+            }
+            return ex;
+        }
+        public void EditExtras(string breakdesc,string dindesc,string name, string start, string end,int bookingRef)
+        {
+            string query = "UPDATE extras SET bDesc='" + breakdesc + "',dDesc='" + dindesc + "',carHireName='" + name + "',hireStart='" + start + "',HireEnd='" + end + "' WHERE bookingRef=" + bookingRef + ";";
+
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.ExecuteNonQuery();
                 this.CloseConnection();
             }
         }
