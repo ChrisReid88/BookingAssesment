@@ -24,9 +24,9 @@
         <Separator HorizontalAlignment="Left" Height="4" Margin="0,122,0,0" Grid.Row="1" VerticalAlignment="Top" Width="342"/>
         <Label Content="Edit Booking" HorizontalAlignment="Left" Margin="10,131,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
         <Label Content="Enter Booking Reference" HorizontalAlignment="Left" Margin="31,162,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtBookingReference" HorizontalAlignment="Left" Height="23" Margin="202,165,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnLoadBooking" Content="Edit" HorizontalAlignment="Left" Margin="64,211,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btnLoadBooking_Click"/>
-        <Button x:Name="btnDeleteBooking" Content="Delete" HorizontalAlignment="Left" Margin="202,211,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="txtBookingReference" HorizontalAlignment="Left" Height="23" Margin="202,165,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="txtBookingReference_TextChanged"/>
+        <Button x:Name="btnLoadBooking" Content="Edit" HorizontalAlignment="Left" Margin="64,211,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btnLoadBooking_Click" IsEnabled="False"/>
+        <Button x:Name="btnDeleteBooking" Content="Delete" HorizontalAlignment="Left" Margin="202,211,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="btnDeleteBooking_Click"/>
 
     </Grid>
 </Window>

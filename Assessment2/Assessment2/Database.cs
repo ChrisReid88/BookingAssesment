@@ -130,11 +130,11 @@ namespace Assessment2
             }
         }
 
-        public List<Guest> SetGuest(int bookingRef)
+        public BindingList<Guest> SetGuest(int bookingRef)
         {
             string query = "SELECT guestName, age, passportNo FROM guest WHERE bookingRef=" + bookingRef + ";";
             MySqlDataReader sdr; 
-            List<Guest> guest = new List<Guest>();
+            BindingList<Guest> guest = new BindingList<Guest>();
             if (this.OpenConnection() == true)
             {
                 MySqlCommand comm = new MySqlCommand(query, conn);
@@ -268,6 +268,23 @@ namespace Assessment2
             {
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 cmd.ExecuteNonQuery();
+                this.CloseConnection();
+            }
+        }
+        public void DeleteBooking(int bookingRef)
+        {
+            string query2 = "DELETE FROM booking WHERE bookingRef='" + bookingRef + "';";
+
+            if (this.OpenConnection() == true)
+            {
+                MySqlDataReader sdr;
+                MySqlCommand comm = new MySqlCommand(query2, conn);
+                sdr = comm.ExecuteReader();
+                while (sdr.Read())
+                {
+                    bookingRef = Int32.Parse(sdr.GetString(2));
+                }
+                sdr.Close();
                 this.CloseConnection();
             }
         }

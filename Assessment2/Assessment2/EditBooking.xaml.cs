@@ -29,7 +29,6 @@ namespace Assessment2
             InitializeComponent();
             this.booking = booking;
             this.c = c;
-         
         }
 
         private void btnBookingUpdate_Click(object sender, RoutedEventArgs e)
@@ -46,8 +45,19 @@ namespace Assessment2
         {
             txtEditGuestAge.IsEnabled = true;
             txtEditGuestName.IsEnabled = true;
-            txtEditGuestName.SelectedItem 
+            string selected = cbbGuests.SelectedItem.ToString();
+            string[] item = selected.Split('|');
+            txtEditGuestName.Text = item[0];
+            txtEditGuestAge.Text = item[1];
+            txtGuestPN.Text = item[2];
             
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            this.Close();
         }
 
 

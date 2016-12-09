@@ -73,7 +73,7 @@ namespace Assessment2
 
         private void txtEditCustP_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(txtEditCustP.Text != "")
+            if (txtEditCustP.Text != "")
             {
                 btnLoad.IsEnabled = true;
                 btnEditCust.IsEnabled = true;
@@ -101,6 +101,23 @@ namespace Assessment2
 
         }
 
+        private void txtBookingReference_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtBookingReference.Text != "")
+            {
+                btnDeleteBooking.IsEnabled = true;
+                btnLoadBooking.IsEnabled = true;
+            }
+        }
 
+        private void btnDeleteBooking_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult mbresult = MessageBox.Show("Are you sure you wish to delete this booking?", "Confirm", MessageBoxButton.YesNo);
+            if (mbresult == MessageBoxResult.Yes)
+            {
+                data.DBConnect();
+                data.DeleteBooking(Int32.Parse(txtBookingReference.Text));
+            //}
+        }
     }
 }
