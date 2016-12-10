@@ -25,13 +25,13 @@ namespace Assessment2
         //Creating a new booking and guest. Declaring private classes to be passed into
         Booking booking = new Booking();
         private Customer c;
-        private Database data;
+        private DatabaseFacade data;
         Guest guest = new Guest();
 
         //Binding list to store all guest and be binded with a listbox
         BindingList<Guest> bindingguest = new BindingList<Guest>();
 
-        public BookingWindow(Customer c, Database data)
+        public BookingWindow(Customer c, DatabaseFacade data)
         {
             InitializeComponent();
             // bind the list to the listbox

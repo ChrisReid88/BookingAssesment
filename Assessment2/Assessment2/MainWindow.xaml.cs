@@ -23,7 +23,7 @@ namespace Assessment2
     public partial class MainWindow : Window
     {
         //Creating new instances of classes
-        Database data = new Database();
+        DatabaseFacade data = new DatabaseFacade();
         Customer c = new Customer();
         Guest guest = new Guest();
 
@@ -133,6 +133,7 @@ namespace Assessment2
         private void btnLoadBooking_Click(object sender, RoutedEventArgs e)
         {
             //Pull booking and customer details from database
+            Singleton db = Singleton.Instance;
             data.DBConnect();
             Booking booking = data.SetBooking(Int32.Parse(txtBookingReference.Text));
             Customer customer = data.SetCustomer(booking.CustomerRef);

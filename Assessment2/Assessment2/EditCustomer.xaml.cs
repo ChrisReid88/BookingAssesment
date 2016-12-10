@@ -21,7 +21,7 @@ namespace Assessment2
     {
         //Customer for reference
         private Customer c;
-        Database data = new Database();
+        DatabaseFacade data = new DatabaseFacade();
 
         public EditCustomer(Customer c)
         {

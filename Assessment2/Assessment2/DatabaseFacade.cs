@@ -9,9 +9,21 @@ using System.ComponentModel;
 
 namespace Assessment2
 {
-    public class Database
+    public class DatabaseFacade
     {
+
+        private Customer customer;
+        private Guest guest;
+        private Booking booking;
+
         private MySqlConnection conn;
+
+        public DatabaseFacade()
+        {
+            customer = new Customer();
+            booking = new Booking();
+            guest = new Guest();
+        }
 
         public void DBConnect()
         {
@@ -183,7 +195,7 @@ namespace Assessment2
         {
             string query = "SELECT customerRef, name, address FROM customer WHERE customerRef='" + customerRef + "';";
             MySqlDataReader sdr;
-            Customer customer = new Customer();
+            
 
             if (this.OpenConnection() == true)
             {

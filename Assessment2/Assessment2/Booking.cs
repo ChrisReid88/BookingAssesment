@@ -20,10 +20,9 @@ namespace Assessment2
         private DateTime arrival_date;
         private DateTime departure_date;
         private int bookingRef;
-        private int customerRef;
         private int totalStayPrice;
         private int cost;
-
+       private int customerRef;
 
         //Property for manipulating booking reference
         public int BookingRef
@@ -31,13 +30,7 @@ namespace Assessment2
             get { return bookingRef; }
             set { bookingRef = value; }
         }
-        //Property for manipulating customer reference
-        public int CustomerRef
-        {
-            get { return bookingRef; }
-            set { bookingRef = value; }
-        }
-
+  
         //Property for manipulating total stay price
         public int TotalStayPrice
         {
@@ -57,6 +50,12 @@ namespace Assessment2
         {
             get { return departure_date; }
             set { departure_date = value; }
+        }
+
+        public int CustomerRef
+        {
+            get { return customerRef; }
+            set { customerRef = value; }
         }
 
         //Property for manipulating the total cost

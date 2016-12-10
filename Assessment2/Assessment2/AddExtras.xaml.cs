@@ -21,7 +21,7 @@ namespace Assessment2
     {
         //Create connection to database and declare booking b
         private Booking b;
-        Database data = new Database();
+        DatabaseFacade data = new DatabaseFacade();
 
         //Reference booking
         public AddExtras(Booking booking)

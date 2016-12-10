@@ -16,6 +16,7 @@ namespace Assessment2
 {
     public class Customer
     {
+        private Customer customer;
         private string name;
         private string address;
         private int customerRef;

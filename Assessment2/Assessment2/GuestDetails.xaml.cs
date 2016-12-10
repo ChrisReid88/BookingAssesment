@@ -23,7 +23,7 @@ namespace Assessment2
         private Customer c;
         private Guest guest;
         private BindingList<Guest> bindingguest;
-        Database db = new Database();
+        DatabaseFacade db = new DatabaseFacade();
         private Booking booking;
 
 

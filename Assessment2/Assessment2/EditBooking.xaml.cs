@@ -20,7 +20,7 @@ namespace Assessment2
     public partial class EditBooking : Window
     {
         //New instanceof database and guest
-        private Database data = new Database();
+        private DatabaseFacade data = new DatabaseFacade();
         private Guest g = new Guest();
 
         //declaring a booking and customer to use for referencing

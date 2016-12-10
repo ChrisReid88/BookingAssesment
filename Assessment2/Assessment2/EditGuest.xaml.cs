@@ -22,7 +22,7 @@ namespace Assessment2
     {
 
         //New instance of database and private guest and bindinglist for reference
-        Database data = new Database();
+        DatabaseFacade data = new DatabaseFacade();
         private Guest guest;
         private BindingList<Guest> bindingguest;
 

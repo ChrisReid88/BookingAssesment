@@ -9,45 +9,30 @@ using System.Windows;
 
 namespace Assessment2
 {
-    class SingletonDBConnect
+    class Singleton
     {
-        /*
-             * This class implements a logger using the Singleton pattern to ensure only one instance is created.
-             * 
-             */
 
-        //Private properties
-        private static SingletonDBConnect instance;
-        /*
-        * This holds a refence to the ONLY Logger object
-        * Note the use of static to ensure that only one reference to the one Logger object is held 
-        */
-        //Constructors
-        private SingletonDBConnect() { }
-        /*
-        * By declaring this constructor as private it cannot be called when 
-        */
+        private MySqlConnection conn;
+        private static Singleton instance;
 
+        private Singleton() {  }
 
-        /*
-         * Properties
-         */
-
-        public static SingletonDBConnect Instance
+        public static Singleton Instance
             {
             get
             {
                 if (instance == null)
            
                 {
-                    instance = new SingletonDBConnect();
+                    instance = new Singleton();
                 }
                 return instance;
             }
         }
-        public void Connect(Database db)
+        private void Connect()
         {
-          // db.Connect();
+                string DBdetails = "server=127.0.0.1;database=40202859;uid=root;pwd=;";
+                conn = new MySqlConnection(DBdetails);
         }
     }
 }
