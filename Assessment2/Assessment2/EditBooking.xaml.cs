@@ -38,29 +38,35 @@ namespace Assessment2
         //Used apply the changes of the booking
         private void btnBookingUpdate_Click(object sender, RoutedEventArgs e)
         {
-           
-
+          //store the selected arrival and departure dates in the booking properties
             booking.Arrival_date = dtpArrivalEdit.SelectedDate.GetValueOrDefault();
             booking.Departure_date = dtpDepartureEdit.SelectedDate.GetValueOrDefault();
+
+            //edit the booking based on the selected dates and format to mysql
             data.DBConnect();
             data.EditBooking(booking.Arrival_date.ToString("yyyy-MM-dd"), booking.Departure_date.ToString("yyyy-MM-dd"));
-            data.DBConnect();
-
+       
         }
 
-
+        //assigns items to the combobox when a selection is made
         private void cbbGuests_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Enables textboxes for users to update values
             txtEditGuestAge.IsEnabled = true;
             txtEditGuestName.IsEnabled = true;
+
+            //breaks the string into seperate strings from the delimiter
             string selected = cbbGuests.SelectedItem.ToString();
             string[] item = selected.Split('|');
+
+            //puts the values from the seperated string into the correct textboxes
             txtEditGuestName.Text = item[0];
             txtEditGuestAge.Text = item[1];
             txtGuestPN.Text = item[2];
 
         }
 
+        //Simple cancel button
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mw = new MainWindow();
@@ -68,6 +74,7 @@ namespace Assessment2
             this.Close();
         }
 
+        //Guest update button
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             if (cbbGuests.SelectedItem == null)
@@ -76,12 +83,14 @@ namespace Assessment2
             }
             else
             {
+                //Updates the record in the database to the corresponding textboxes and shows confirmation message
                 data.DBConnect();
                 data.EditGuest(txtEditGuestName.Text, Int32.Parse(txtEditGuestAge.Text), txtGuestPN.Text);
                 MessageBox.Show("Guest has been successfully changed.");
             }
         }
 
+        //deletes a guest from the booking
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             if (cbbGuests.SelectedItem == null)
@@ -90,20 +99,27 @@ namespace Assessment2
             }
             else
             {
+                //Delete from database and confirm
                 data.DBConnect();
                 data.DeleteGuest(txtGuestPN.Text);
-
                 MessageBox.Show("Guest successfully deleted.");
+                
             }
         }
 
+        //Updates the extras and calculates prices
         private void btnUpdateExtras_Click(object sender, RoutedEventArgs e)
         {
-            
+            //Update database
             data.DBConnect();
             data.EditExtras(txtBreakfastDesc.Text, txtDinnerDesc.Text, txtCarHireName.Text, booking.HireStart.ToString("yyyy-MM-dd"), booking.HireEnd.ToString("yyyy-MM-dd"), Int32.Parse(lblBookingRef.Content.ToString()));
+
+            //confirmation to user
             MessageBox.Show("Extras successfully update");
+
+            //Calculate the price of the rooms for the booking
             booking.TotalStayPrice = booking.TotalStayPrice + g.agePrice();
+            //calculate the total price with extras
             booking.Cost = (booking.TotalStayPrice * booking.getDuration()) + booking.Breakfast + booking.Dinner + booking.CarHire;
         }
 

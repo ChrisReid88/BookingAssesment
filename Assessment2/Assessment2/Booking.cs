@@ -10,19 +10,20 @@ using System.Threading.Tasks;
  *from the Extras class
 *
 * Written by Chris Reid 1/12/16
+ * last modified 09/12/16
 */
 
 namespace Assessment2
 {
     public class Booking : Extras
     {
-
+        //Private properties 
         private DateTime arrival_date;
         private DateTime departure_date;
         private int bookingRef;
         private int totalStayPrice;
         private int cost;
-       private int customerRef;
+        private int customerRef;
 
         //Property for manipulating booking reference
         public int BookingRef
@@ -30,7 +31,7 @@ namespace Assessment2
             get { return bookingRef; }
             set { bookingRef = value; }
         }
-  
+
         //Property for manipulating total stay price
         public int TotalStayPrice
         {
@@ -74,13 +75,13 @@ namespace Assessment2
         //return breakfast for duration
         public int GetBreakfast()
         {
-           return Breakfast = (getDuration() * 5);
+            return Breakfast = (getDuration() * 5);
         }
         //return dinner for duration of stay
         public int GetDinner()
         {
             return Dinner = (getDuration() * 15);
         }
-      
+
     }
 }

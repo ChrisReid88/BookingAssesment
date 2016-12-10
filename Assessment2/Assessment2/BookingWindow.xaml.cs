@@ -209,6 +209,7 @@ namespace Assessment2
             invoice.lblPricePerNight.Content = "£" + booking.TotalStayPrice.ToString();
             invoice.lblCarHireDuration.Content = booking.getHireDuration().ToString() + " days";
 
+            //Shows the invoice and closes current window
             invoice.ShowDialog();
             this.Close();
         }

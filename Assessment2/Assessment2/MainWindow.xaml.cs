@@ -13,8 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
-
 namespace Assessment2
 {
     /// <summary>
@@ -57,13 +55,16 @@ namespace Assessment2
                 MessageBox.Show("Please insert new customer details to create a booking.");
             }
 
-
         }
 
         //Enables user to edit a customers details
         private void btnEditCust_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (c.CustomerRef == 0)
+            {
+                MessageBox.Show("Failed to find that customer. Please retry");
+            }
+            else
             {
                 //Pulls customer details from the database using the customer reference number entered in textbox
                 data.DBConnect();
@@ -76,10 +77,6 @@ namespace Assessment2
                 ec.txtEditCustAddress.Text = c2.Address;
                 ec.ShowDialog();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
 
         }
 
@@ -89,13 +86,13 @@ namespace Assessment2
         {
 
             //Pulls customer details from database using customer reference number entered
-            
+
             data.DBConnect();
             Customer c = data.SetCustomer(Int32.Parse(txtEditCustP.Text));
 
-            if (c.CustomerRef == 0 )
+            if (c.CustomerRef == 0)
             {
-                 MessageBox.Show("Failed to find that customer. Please retry");
+                MessageBox.Show("Failed to find that customer. Please retry");
             }
             else
             {
@@ -141,7 +138,7 @@ namespace Assessment2
 
             if (booking.BookingRef == 0)
             {
-                MessageBox.Show("Failed to find that customer. Please retry");
+                MessageBox.Show("Failed to find that booking. Please retry");
             }
             else
             {
@@ -189,6 +186,9 @@ namespace Assessment2
         //Delete a booking(Extra measurements to ensure booking is not accidentally deleted)
         private void btnDeleteBooking_Click(object sender, RoutedEventArgs e)
         {
+
+
+
             //Display message box requesting confirmation of delete. Display yes or no buttons.
             MessageBoxResult mbresult = MessageBox.Show("Are you sure you wish to delete this booking?", "Confirm", MessageBoxButton.YesNo);
             if (mbresult == MessageBoxResult.Yes)
@@ -202,12 +202,19 @@ namespace Assessment2
         //Delete a customer(Extra measurements to ensure booking is not accidentally deleted)
         private void btnDeleteCustomer_Click(object sender, RoutedEventArgs e)
         {
-            //Display message box requesting confirmation of delete. Display yes or no buttons.
-            MessageBoxResult mbresult = MessageBox.Show("Are you sure you wish to delete this booking?", "Confirm", MessageBoxButton.YesNo);
-            if (mbresult == MessageBoxResult.Yes)
+            if (c.CustomerRef == 0)
             {
-                data.DBConnect();
-                data.DeleteCustomer(Int32.Parse(txtEditCustP.Text));
+                MessageBox.Show("Failed to find that customer. Please retry");
+            }
+            else
+            {
+                //Display message box requesting confirmation of delete. Display yes or no buttons.
+                MessageBoxResult mbresult = MessageBox.Show("Are you sure you wish to delete this booking?", "Confirm", MessageBoxButton.YesNo);
+                if (mbresult == MessageBoxResult.Yes)
+                {
+                    data.DBConnect();
+                    data.DeleteCustomer(Int32.Parse(txtEditCustP.Text));
+                }
             }
         }
     }

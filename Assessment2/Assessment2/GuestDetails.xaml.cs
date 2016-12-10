@@ -59,7 +59,7 @@ namespace Assessment2
             }
 
         }
-
+        //closes the current window without making any changes
         private void btnGuestCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

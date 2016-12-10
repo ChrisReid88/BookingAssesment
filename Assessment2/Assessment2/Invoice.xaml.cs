@@ -32,6 +32,7 @@ namespace Assessment2
             this.guest = guest;
         }
 
+        //Close button
         private void btnCloseInvoice_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

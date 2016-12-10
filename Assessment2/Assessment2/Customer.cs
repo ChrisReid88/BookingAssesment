@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 *This class is used for creating the customers 
 *
 * Written by Chris Reid 1/12/16
+ * last modified 10/12/2016
 */
 
 
